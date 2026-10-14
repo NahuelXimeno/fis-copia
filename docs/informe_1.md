@@ -687,6 +687,26 @@ Para bajar a tierra los casos de uso y tener una vista previa de la experiencia 
 
 A continuación se detallan las **5 pantallas y componentes centrales** que componen la interfaz de usuario de la plataforma:
 
+![Pantalla principal de CULTURAMA](img/prototipo-inicio.jpeg)
+
+*Pantalla principal / Inicio ("Descubrir Algo Nuevo").*
+
+![Sección de propuestas culturales similares](img/prototipo-similares.jpeg)
+
+*Sección de descubrimiento relacionado ("Similares").*
+
+![Cartelera completa con filtros](img/prototipo-cartelera.jpeg)
+
+*Cartelera completa y filtrado multicriterio.*
+
+![Modal de selección de intereses culturales](img/prototipo-preferencias.jpeg)
+
+*Modal de calibración de preferencias ("Elegí lo que te inspira").*
+
+![Vista de eventos guardados en Favoritos](img/prototipo-favoritos.jpeg)
+
+*Vista de eventos guardados ("Favoritos").*
+
 #### 1. Pantalla Principal / Inicio ("Descubrir Algo Nuevo")
 
 - **Barra de Navegación Superior:** Logotipo e isotipo de CULTURAMA, barra de búsqueda omnibox integrada (_"Buscar obras, recitales, museos..."_), acceso directo a la configuración de intereses (_"Mis gustos"_) y acceso con badge numérico a la colección personal (_"Favoritos 1"_).
