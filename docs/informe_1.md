@@ -23,13 +23,14 @@ A continuación se detalla la dedicación horaria y las actividades realizadas p
 | **23/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 3 — Requisitos y Modelo de Dominio:** Definición y priorización de requerimientos funcionales y no funcionales con MoSCoW, redacción de User Stories (formato INVEST con criterios Dado / Cuando / Entonces), especificación de Casos de Uso y diseño del Modelo de Dominio (MER).                                   |    3.0 h c/u     |
 | **29/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 4 — Repositorio Git, Bocetos y Cierre:** Configuración del repositorio en GitHub, definición de ramas (`main`, `DevNahuel`, `DevLautaro`) y pautas de commits, diseño del prototipo de interfaz, verificación y validación, sección de IA, reflexión del equipo y revisión final del informe.                        |    2.5 h c/u     |
 | **13/10/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 5 — Ajustes, Formato y Refinamiento:** Revisión integral del informe, ajuste del tono de redacción para hacerlo más claro y natural, detalle explícito del uso de Gemini como LLM, reestructuración formal de los Casos de Uso bajo plantilla con secuencias normales y alternativas, e integración de la matriz de trazabilidad con los requerimientos. |    2.0 h c/u     |
+| **14/10/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 6 — Anexo de Entrevistas, Modelo UML y Sincronización:** Consolidación y estructuración del documento de anexo (`anexo.md`) con las transcripciones completas de las 3 entrevistas, especificación del Diagrama de Clases UML de la aplicación (separando capas de interfaz, dominio y persistencia local), actualización e integración de la sección de Modelo de Dominio, y sincronización de las ramas de desarrollo (`main`, `DevNahuel`, `DevLautaro`) en GitHub. |    2.0 h c/u     |
 
 ### Resumen por Integrante
 
 | Integrante         | Horas Totales | Tareas Clave                                                                                                                                                                                |
 | :----------------- | :-----------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Nahuel Ximeno**  |  **13.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, diagramación del modelo de dominio, setup y gestión de Git, bocetos UI, formato de casos de uso y redacción.   |
-| **Lautaro Moreno** |  **13.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, especificación de RF/RNF con MoSCoW, redacción de User Stories, Casos de Uso, matriz de trazabilidad y revisión. |
+| **Nahuel Ximeno**  |  **15.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, diagramación del modelo de dominio UML, setup y sincronización de Git, bocetos UI, formato de casos de uso y redacción. |
+| **Lautaro Moreno** |  **15.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, especificación de RF/RNF con MoSCoW, redacción de User Stories, Casos de Uso, consolidación de entrevistas en anexo, matriz de trazabilidad y revisión. |
 
 ---
 
@@ -530,6 +531,150 @@ flowchart LR
 | # | Acción (actor) | Reacción (sistema) |
 | - | ------------------------------ | ------------------------------ |
 | 2.1 | Si faltan datos obligatorios o la fecha de inicio es anterior a la fecha actual | El sistema muestra los mensajes de error correspondientes y no guarda los cambios hasta su corrección. |
+
+---
+
+## Modelo de Dominio
+
+Para estructurar la lógica del sistema y dar sustento a los casos de uso definidos, se diseñó el **Modelo de Clases UML de la Aplicación**, desacoplando estrictamente la interfaz de usuario (`src/interface`), el núcleo de dominio (`src/domain`) y la persistencia local en navegador (`localStorage`), en conformidad con el requisito **RNF-05**.
+
+El detalle íntegro y su especificación exhaustiva se encuentra documentado en [anexo.md](anexo.md). A continuación se presenta el diagrama general de clases del software:
+
+```mermaid
+classDiagram
+    direction TB
+
+    AppController --> CulturamaApp : coordina logica
+    AppController --> CarteleraView : actualiza
+    AppController --> DescubrimientoView : actualiza
+    AppController --> ModalPreferenciasView : abre y cierra
+    AppController --> FavoritosView : actualiza
+
+    CulturamaApp *-- CatalogoEventos : contiene
+    CulturamaApp *-- MotorRecomendacion : orquesta
+    CulturamaApp *-- ServicioGamificacion : delega
+    CulturamaApp --> Usuario : usuario actual
+    CulturamaApp --> AlmacenamientoLocal : persiste estado
+
+    CatalogoEventos "1" o-- "*" Evento : administra
+    MotorRecomendacion ..> Evento : analiza
+    MotorRecomendacion ..> Usuario : consulta perfil
+    MotorRecomendacion ..> PuenteCultural : aplica reglas
+
+    class AppController {
+        -CarteleraView carteleraView
+        -DescubrimientoView descubrimientoView
+        -ModalPreferenciasView modalView
+        -FavoritosView favoritosView
+        -CulturamaApp app
+        +iniciar() void
+        +onCambiarPestana(pestanaId) void
+        +onFiltrarEventos(filtros) void
+        +onGuardarIntereses(intereses) void
+        +onToggleFavorito(eventoId) void
+    }
+
+    class CarteleraView {
+        +renderizar(eventos) void
+        +obtenerValoresFiltro() CriterioFiltro
+        +limpiarFiltros() void
+    }
+
+    class DescubrimientoView {
+        +renderizarSeccionParaVos(eventos) void
+        +renderizarSeccionSimilares(puentes) void
+        +mostrarExplicacionPuente(texto) void
+    }
+
+    class ModalPreferenciasView {
+        +abrir() void
+        +cerrar() void
+        +renderizarCategorias(categorias, seleccionadas) void
+        +obtenerSeleccionadas() List
+    }
+
+    class FavoritosView {
+        +renderizarLista(eventosFavoritos) void
+        +actualizarBadgeContador(cantidad) void
+    }
+
+    class CulturamaApp {
+        -CatalogoEventos catalogo
+        -MotorRecomendacion motorRecomendacion
+        -ServicioGamificacion gamificacion
+        -Usuario usuarioActivo
+        -AlmacenamientoLocal storage
+        +obtenerCartelera(filtro) List
+        +obtenerSugerenciasParaVos() List
+        +obtenerSugerenciasSimilares() List
+        +alternarFavorito(eventoId) boolean
+        +guardarIntereses(intereses) void
+        +reclamarDesafio(desafioId) boolean
+    }
+
+    class CatalogoEventos {
+        -List eventos
+        +buscar(filtro) List
+        +obtenerPorId(id) Evento
+        +obtenerCategoriasDisponibles() List
+    }
+
+    class MotorRecomendacion {
+        -List puentesRegistrados
+        +recomendarPorAfinidad(usuario, cartelera) List
+        +recomendarFueraDeConfort(usuario, cartelera) List
+        +calcularPuente(catOrigen, catDestino) PuenteCultural
+    }
+
+    class ServicioGamificacion {
+        +obtenerDesafiosSemanales() List
+        +validarAsistencia(usuario, eventoId) boolean
+        +canjearBeneficio(usuario, beneficioId) boolean
+    }
+
+    class Evento {
+        -string id
+        -string titulo
+        -string descripcion
+        -Date fechaHora
+        -number precio
+        -boolean esEntradaLibre
+        -string sala
+        -string barrio
+        -string categoria
+        -string urlCompra
+        +esVigente() boolean
+        +esGratuito() boolean
+        +coincideConFiltro(filtro) boolean
+    }
+
+    class Usuario {
+        -string id
+        -string nombre
+        -List intereses
+        -List favoritosIds
+        -number saldoPuntos
+        +agregarFavorito(eventoId) void
+        +eliminarFavorito(eventoId) void
+        +actualizarIntereses(nuevosIntereses) void
+        +sumarPuntos(pts) void
+        +puedeCanjear(costoPuntos) boolean
+    }
+
+    class PuenteCultural {
+        -string categoriaOrigen
+        -string categoriaDestino
+        -string textoExplicacion
+        +aplicaPara(interesesUsuario) boolean
+        +generarMensajeConexion() string
+    }
+
+    class AlmacenamientoLocal {
+        +guardar(clave, data) void
+        +recuperar(clave) any
+        +eliminar(clave) void
+    }
+```
 
 ---
 

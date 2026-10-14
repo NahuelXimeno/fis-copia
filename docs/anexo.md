@@ -1,8 +1,16 @@
-Transcripcion entrevista:
+# Anexo — CULTURAMA
 
-Culturama — Entrevistas exploratorias
+## Registro de Trabajo — Reunión 6
 
-Objetivo: comprender cómo personas de diferentes edades que forman parte del rango de nuestro público objetivo descubren actividades culturales en Montevideo, qué dificultades encuentran y cómo reaccionaría ante una plataforma que centraliza eventos y fomenta la exploración cultural.
+| Fecha | Participantes | Horas | Actividades Realizadas |
+| :--- | :--- | :---: | :--- |
+| **14/10/2026** | Nahuel Ximeno, Lautaro Moreno | 2.0 h c/u | **Reunión 6 — Documentación de Anexo y Modelo de Dominio UML:** Consolidación de este anexo (`anexo.md`) con las transcripciones completas de las 3 entrevistas exploratorias (Sofía de 20 años, Martín de 30 años y Carolina de 42 años); diseño y formalización del Diagrama de Clases UML de la aplicación (desacoplando capas de interfaz, dominio y persistencia local); integración de la sección de Modelo de Dominio dentro de `informe_1.md`; y sincronización de las ramas de desarrollo `DevNahuel` y `DevLautaro` con `main` en GitHub. |
+
+---
+
+## Transcripciones de Entrevistas Exploratorias
+
+**Objetivo:** Comprender cómo personas de diferentes edades que forman parte del rango de nuestro público objetivo descubren actividades culturales en Montevideo, qué dificultades encuentran y cómo reaccionarían ante una plataforma que centraliza eventos y fomenta la exploración cultural.
 
 Entrevista 1 — Sofia, estudiante universitaria de derecho. 20 años. Montevideo. Usuaria intensiva de redes sociales (Instagram, TikTok). Alta disponibilidad para planes de fin de semana con amigos, pero condicionada por presupuesto estudiantil y habitual a un circuito restringido de música en vivo y recitales.
 
