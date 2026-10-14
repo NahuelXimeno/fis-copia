@@ -18,17 +18,18 @@ A continuación se detalla la dedicación horaria y las actividades realizadas p
 
 | Fecha          | Participantes                 | Actividades Realizadas                                                                                                                                                                                                                                                                                                                                                                 | Horas Invertidas |
 | :------------- | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------: |
-| **09/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 1 — Ideación y Planificación de Investigación:** Definición de la propuesta de valor de _CULTURAMA_, formulación de hipótesis del problema (dispersión cultural y filtro burbuja en Montevideo), delimitación de los 3 segmentos etarios (20, 30 y 40 años) y elaboración del cuestionario de 12 preguntas para entrevistas.                                                 |    2.5 h c/u     |
-| **16/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 2 — Puesta en Común y Análisis de Entrevistas:** Desgrabación y triangulación de las 3 entrevistas realizadas (Sofía de 20 años, Martín de 30 años y Carolina de 40 años). Identificación de dolores clave: encierro algorítmico, enterarse tarde de eventos, validación del "puente cultural" y gamificación con puntos/desafíos.                                           |    3.0 h c/u     |
-| **23/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 3 — Especificación de Requisitos y Dominio:** Definición y priorización de Requisitos Funcionales y No Funcionales mediante la técnica MoSCoW, redacción de User Stories bajo formato INVEST con criterios de aceptación estructurados (Dado / Cuando / Entonces), especificación de Casos de Uso y diseño conceptual del Modelo de Dominio (Modelo Entidad-Relación - MER). |    3.0 h c/u     |
-| **29/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 4 — Repositorio Git, Bocetos UI y Cierre de Entrega:** Configuración del repositorio local/remoto en GitHub, ramas de trabajo (`main`, `DevNahuel`, `DevLautaro`), pautas de commits, diseño de wireframes de interfaz, verificación y validación, sección de IA, balance reflexivo y revisión final del informe.                                                            |    2.5 h c/u     |
+| **09/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 1 — Ideación y Planificación:** Definición de la idea de _CULTURAMA_, análisis del problema (dispersión de eventos y repetición de planes en Montevideo), selección de los 3 segmentos de edad (20, 30 y 40 años) y armado de las preguntas para las entrevistas.                                                 |    2.5 h c/u     |
+| **16/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 2 — Puesta en Común de Entrevistas:** Transcripción y análisis de las 3 entrevistas realizadas (Sofía de 20 años, Martín de 30 años y Carolina de 40 años). Identificación de los problemas principales: caer siempre en lo mismo, enterarse tarde de las actividades, interés en sugerencias fuera de la rutina con puente cultural y sistema de desafíos con puntos. |    3.0 h c/u     |
+| **23/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 3 — Requisitos y Modelo de Dominio:** Definición y priorización de requerimientos funcionales y no funcionales con MoSCoW, redacción de User Stories (formato INVEST con criterios Dado / Cuando / Entonces), especificación de Casos de Uso y diseño del Modelo de Dominio (MER).                                   |    3.0 h c/u     |
+| **29/09/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 4 — Repositorio Git, Bocetos y Cierre:** Configuración del repositorio en GitHub, definición de ramas (`main`, `DevNahuel`, `DevLautaro`) y pautas de commits, diseño del prototipo de interfaz, verificación y validación, sección de IA, reflexión del equipo y revisión final del informe.                        |    2.5 h c/u     |
+| **13/10/2026** | Nahuel Ximeno, Lautaro Moreno | **Reunión 5 — Ajustes, Formato y Refinamiento:** Revisión integral del informe, ajuste del tono de redacción para hacerlo más claro y natural, detalle explícito del uso de Gemini como LLM, reestructuración formal de los Casos de Uso bajo plantilla con secuencias normales y alternativas, e integración de la matriz de trazabilidad con los requerimientos. |    2.0 h c/u     |
 
 ### Resumen por Integrante
 
 | Integrante         | Horas Totales | Tareas Clave                                                                                                                                                                                |
 | :----------------- | :-----------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Nahuel Ximeno**  |  **11.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, diagramación del modelo de dominio, setup y gestión del repositorio Git, bocetos UI y redacción del informe.      |
-| **Lautaro Moreno** |  **11.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, especificación de RF/RNF con MoSCoW, redacción de User Stories (INVEST), Casos de Uso y validación de requisitos. |
+| **Nahuel Ximeno**  |  **13.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, diagramación del modelo de dominio, setup y gestión de Git, bocetos UI, formato de casos de uso y redacción.   |
+| **Lautaro Moreno** |  **13.0 h**   | Ideación de CULTURAMA, diseño de cuestionarios y análisis de entrevistas, especificación de RF/RNF con MoSCoW, redacción de User Stories, Casos de Uso, matriz de trazabilidad y revisión. |
 
 ---
 
@@ -36,53 +37,53 @@ A continuación se detalla la dedicación horaria y las actividades realizadas p
 
 ### Vínculo con Conceptos de Repositorio Remoto y Local
 
-Durante el ciclo de desarrollo de software se implementó un flujo de trabajo basado en el sistema de control de versiones distribuido **Git**, articulando los siguientes conceptos fundamentales:
+Para el desarrollo del proyecto utilizamos **Git** como sistema de control de versiones, organizando el trabajo entre el repositorio remoto y nuestros entornos locales:
 
-- **Repositorio Remoto (GitHub):** Alojado en la plataforma en la nube (`https://github.com/IngSoft-FIS-2026-2/m3a-adorjan-roll-proyecto-group-8.git`), actúa como la fuente canónica y centralizada de la verdad del proyecto (_Single Source of Truth_). Su propósito es centralizar las versiones estables, respaldar los artefactos de desarrollo, permitir la integración del trabajo colaborativo de ambos integrantes y servir como base para el seguimiento académico y las revisiones por parte del equipo docente.
-- **Repositorio Local:** Cada desarrollador mantiene una copia completa y autónoma del repositorio en su estación de trabajo local (`d:\escritorio\ORT\fis`). Esta arquitectura permite trabajar de manera desconectada, consultar el historial completo de versiones de forma inmediata, crear ramas experimentales y registrar cambios mediante commits locales sin afectar el flujo de trabajo del compañero hasta que los cambios estén listos para ser compartidos.
+- **Repositorio Remoto (GitHub):** Alojado en la nube (`https://github.com/IngSoft-FIS-2026-2/m3a-adorjan-roll-proyecto-group-8.git`), es el punto central donde integramos el trabajo de ambos integrantes, respaldamos el proyecto y mantenemos las versiones estables para las entregas y el seguimiento del curso.
+- **Repositorio Local:** Cada desarrollador mantiene una copia completa del repositorio en su máquina (`d:\escritorio\ORT\fis`). Esto nos permite avanzar de forma independiente, probar cambios y hacer commits locales sin interferir con el trabajo del compañero hasta estar listos para sincronizar.
 
 ### Estrategia de Ramas (Branching Strategy)
 
-Para asegurar la estabilidad del proyecto y el aislamiento de responsabilidades se adoptó un modelo de ramificación adaptado a un equipo de dos desarrolladores:
+Para trabajar en paralelo de forma ordenada y no pisarnos los cambios, definimos el siguiente esquema de ramas:
 
 1. **Rama `main` (Producción / Entregas):**
-   - Es la rama principal y protegida.
-   - Contiene únicamente versiones estables, validadas y documentadas que cumplen con la totalidad de los criterios de aceptación y calidad.
-   - No se realizan modificaciones directas sobre `main`. La integración se realiza mediante _Pull Requests_ (PR) una vez que las funcionalidades o documentos han sido revisados y testeados.
+   - Es la rama principal del proyecto.
+   - Contiene únicamente versiones terminadas y probadas que cumplen con los requisitos de cada entrega.
+   - No hacemos cambios directos sobre `main`; integramos el trabajo mediante _Pull Requests_ (PR) luego de revisarlo y validarlo.
 
 2. **Ramas de Desarrollo Individual (`DevNahuel` y `DevLautaro`):**
-   - Ramas dedicadas creadas a partir de `main` para que cada integrante elabore sus tareas asignadas sin riesgo de generar colisiones ni estados inconsistentes en el código o la documentación compartida.
-   - Cada desarrollador trabaja en su rama propia, realizando commits atómicos frecuentes y sincronizando (`push`/`pull`) con sus respectivas ramas remotas de seguimiento en GitHub (`origin/DevNahuel` y `origin/DevLautaro`).
-   - Para la incorporación de nuevas características específicas de mayor envergadura, se prevé la creación de sub-ramas bajo la convención `feature/<nombre-funcionalidad>`.
+   - Ramas creadas a partir de `main` para que cada uno trabaje en sus tareas asignadas sin riesgo de generar conflictos en el código o la documentación compartida.
+   - Cada uno trabaja en su rama propia, haciendo commits frecuentes y sincronizando (`push`/`pull`) con sus respectivas ramas remotas en GitHub (`origin/DevNahuel` y `origin/DevLautaro`).
+   - Para funcionalidades puntuales de mayor tamaño, creamos ramas dedicadas bajo la convención `feature/<nombre-funcionalidad>`.
 
 ### Pautas de Commits y Acuerdos Grupales
 
-Para mantener un historial de cambios legible, trazable y estructurado, el equipo acordó las siguientes pautas de trabajo:
+Para mantener un historial ordenado y fácil de seguir, acordamos las siguientes pautas:
 
-- **Convención de Mensajes de Commit:** Se sigue una convención estandarizada en español inspirada en _Conventional Commits_, estructurada con un prefijo semántico que define el propósito del cambio:
+- **Convención de Mensajes de Commit:** Seguimos una convención basada en _Conventional Commits_ con prefijos claros en español según el tipo de cambio:
   - `docs:` Cambios o incorporaciones en la documentación académica (`informe_1.md`, etc.).
-  - `feat:` Incorporación de una nueva funcionalidad en la aplicación.
-  - `fix:` Corrección de un defecto o bug reportado.
-  - `refactor:` Reestructuración del código fuente sin alterar el comportamiento observable.
-  - `style:` Modificaciones visuales, de formato o estilos CSS.
-  - `test:` Adición o modificación de pruebas unitarias o de integración.
-  - `chore:` Tareas rutinarias de configuración (ej. npm, linters, gitignore).
-- **Atomicidad:** Cada commit debe representar un cambio lógico único y autocontenido. Se evitan commits masivos o que agrupen modificaciones inconexas.
-- **Tono y Claridad:** Los mensajes se redactan en imperativo o presente, explicando brevemente _qué_ se hizo y, de ser necesario, _por qué_ (ej. `docs: documentar entrevistas y hallazgos en informe_1.md`).
-- **Sincronización Previa:** Antes de comenzar una jornada de trabajo, cada integrante debe actualizar su rama con los últimos cambios de `main` para minimizar divergencias y resolver conflictos de forma temprana.
+  - `feat:` Nuevas funcionalidades en la aplicación.
+  - `fix:` Corrección de errores o defectos.
+  - `refactor:` Mejoras en la estructura del código sin cambiar su comportamiento externo.
+  - `style:` Ajustes visuales, de formato o estilos CSS.
+  - `test:` Pruebas unitarias o de integración.
+  - `chore:` Tareas rutinarias de configuración y mantenimiento (npm, linters, gitignore).
+- **Atomicidad:** Cada commit resuelve un cambio puntual y claro, evitando agrupar modificaciones inconexas en una sola confirmación.
+- **Claridad:** Escribimos los mensajes de forma directa, explicando qué se hizo y, si hace falta, por qué (por ejemplo, `docs: documentar entrevistas y hallazgos en informe_1.md`).
+- **Sincronización Previa:** Antes de empezar una jornada de trabajo, cada integrante actualiza su rama con los últimos cambios de `main` para evitar posibles conflictos al integrar.
 
 ### Propósito y Contenido del Archivo `README.md`
 
-El archivo `README.md` situado en la raíz del repositorio cumple el rol de carta de presentación y guía técnica esencial del proyecto. Sus funciones principales son:
+El archivo `README.md` en la raíz del repositorio funciona como guía inicial y técnica del proyecto. Sus funciones principales son:
 
-- **Descripción del Proyecto:** Presentar la propuesta de valor de _CULTURAMA_, su contexto y sus objetivos principales.
-- **Estructura de Directorios:** Orientar a desarrolladores y evaluadores sobre la distribución del código (`src/domain`, `src/interface`) y la documentación (`docs`).
-- **Instrucciones de Instalación y Ejecución:** Detallar los comandos necesarios para poner en marcha el entorno local (`npm install`, `npm run dev`).
-- **Scripts de Calidad y Construcción:** Explicar cómo correr las herramientas de linting (`npm run lint`), formateo (`npm run format`), suites de pruebas automatizadas (`npm run test`) y empaquetado para producción (`npm run build`).
+- **Presentar el Proyecto:** Explicar qué es _CULTURAMA_, su propuesta de valor y los objetivos que persigue.
+- **Estructura del Proyecto:** Orientar sobre la organización de carpetas para el código (`src/domain`, `src/interface`) y la documentación académica (`docs`).
+- **Instrucciones de Instalación y Uso:** Detallar los comandos para instalar paquetes y levantar el entorno local (`npm install`, `npm run dev`).
+- **Scripts de Calidad y Construcción:** Indicar cómo ejecutar las herramientas de linting (`npm run lint`), formateo (`npm run format`), tests automatizados (`npm run test`) y el empaquetado final (`npm run build`).
 
 ### Organización del Repositorio y Estructura de Archivos
 
-El repositorio está estructurado siguiendo los principios de separación de responsabilidades y modularidad:
+El repositorio está organizado separando claramente las responsabilidades y módulos del sistema:
 
 ```text
 ├── .git/                      # Metadatos del sistema de control de versiones Git
@@ -104,17 +105,17 @@ El repositorio está estructurado siguiendo los principios de separación de res
 
 ### Comandos de Git Utilizados y su Justificación
 
-| Comando                                     | Contexto de Uso y Justificación                                                                                                                                            |
-| :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `git clone <url> .`                         | Clona el repositorio remoto directamente en la carpeta local de trabajo, permitiendo inicializar el espacio de trabajo conservando el historial y la configuración remota. |
-| `git status`                                | Permite verificar en cualquier momento el estado actual del árbol de trabajo, identificando archivos modificados, en staging o sin seguimiento (_untracked_).              |
-| `git branch <nombre>` / `git branch -a`     | Utilizado para crear las ramas de trabajo individual (`DevNahuel` y `DevLautaro`) y auditar la totalidad de ramas locales y remotas.                                       |
-| `git checkout <rama>` / `git switch <rama>` | Permite alternar entre contextos de trabajo y ubicarse en la rama deseada antes de realizar ediciones o pruebas.                                                           |
-| `git add <archivo>` / `git add .`           | Mueve las modificaciones seleccionadas desde el espacio de trabajo local hacia el área de preparación (_staging area_), preparando la confirmación del commit.             |
-| `git commit -m "..."`                       | Crea un punto de control inmutable en el historial con un mensaje descriptivo que certifica la autoría y el propósito del cambio.                                          |
-| `git push -u origin <rama>`                 | Publica los commits de la rama local hacia GitHub y configura el enlace de seguimiento permanente (_upstream tracking_) entre ramas homónimas.                             |
-| `git pull`                                  | Descarga e integra los cambios del repositorio remoto al entorno local, manteniendo sincronizado el estado del proyecto con el del equipo.                                 |
-| `git log --oneline`                         | Inspecciona el historial cronológico resumido para verificar la trazabilidad y la correcta aplicación de commits.                                                          |
+| Comando                                     | Contexto de Uso y Justificación                                                                                             |
+| :------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| `git clone <url> .`                         | Clona el repositorio remoto en la máquina local para empezar a trabajar con todo el historial del proyecto.                 |
+| `git status`                                | Permite chequear qué archivos fueron modificados, cuáles están preparados para commitear y cuáles aún no tienen seguimiento. |
+| `git branch <nombre>` / `git branch -a`     | Utilizado para crear ramas locales (`DevNahuel`, `DevLautaro`) y listar todas las ramas locales y remotas.                  |
+| `git checkout <rama>` / `git switch <rama>` | Permite cambiar de una rama a otra para trabajar en el contexto deseado.                                                    |
+| `git add <archivo>` / `git add .`           | Mueve los cambios seleccionados al área de preparación (_staging area_) antes del commit.                                   |
+| `git commit -m "..."`                       | Guarda los cambios en el historial con un mensaje descriptivo que deja registro del avance.                                 |
+| `git push -u origin <rama>`                 | Sube los commits locales a GitHub y asocia la rama local con su correspondiente remota.                                     |
+| `git pull`                                  | Descarga e integra los cambios remotos al entorno local para mantenernos al día con el trabajo del compañero.              |
+| `git log --oneline`                         | Muestra un resumen del historial cronológico para verificar qué commits se aplicaron.                                       |
 
 ---
 
@@ -122,13 +123,13 @@ El repositorio está estructurado siguiendo los principios de separación de res
 
 ### Métodos de Investigación Utilizados y Justificación
 
-Para fundamentar el diseño de **CULTURAMA** se adoptó un enfoque metodológico mixto con preponderancia cualitativa:
+Para definir y fundamentar la propuesta de **CULTURAMA**, investigamos el problema mediante dos técnicas complementarias:
 
-1. **Entrevistas Semiestructuradas en Profundidad:**
-   - **Justificación:** Es la técnica por excelencia para explorar percepciones subjetivas, motivaciones subyacentes, hábitos cotidianos y puntos de dolor en el consumo de ocio y cultura. A diferencia de un cuestionario cerrado, la entrevista semiestructurada permite repreguntar ante respuestas reveladoras y profundizar en las causas de por qué un usuario deja de asistir a actividades fuera de su rutina.
-   - **Muestreo:** Se seleccionaron 3 perfiles residentes en Montevideo que cubren los segmentos objetivo del producto (20, 30 y 40 años), asegurando diversidad en disponibilidad horaria, ingresos, hábitos digitales y responsabilidades cotidianas.
-2. **Análisis de Alternativas y Brecha de Mercado (Benchmark Exploratorio):**
-   - **Justificación:** Se analizó el ecosistema actual mediante el cual se difunden eventos en Montevideo (cuentas de Instagram, búsquedas genéricas en Google, sitios web de salas y ticketeras). Se verificó la hipótesis de que la oferta existe en gran volumen pero sufre de una severa dispersión y sufre el fenómeno del "filtro burbuja" impuesto por los algoritmos de redes sociales.
+1. **Entrevistas Semiestructuradas:**
+   - **Por qué las elegimos:** Nos permitieron hablar directamente con personas reales sobre cómo buscan planes en su día a día, repreguntar sobre sus frustraciones y entender por qué suelen terminar haciendo siempre lo mismo. A diferencia de una encuesta cerrada, este formato nos dio la flexibilidad de profundizar en motivos espontáneos.
+   - **Muestra:** Entrevistamos a 3 personas en Montevideo de 20, 30 y 40 años para abarcar distintas etapas de vida, disponibilidad horaria, presupuestos y hábitos culturales.
+2. **Revisión de Alternativas Actuales (Benchmark Exploratorio):**
+   - **Por qué lo hicimos:** Analizamos los medios que la gente usa actualmente para enterarse de eventos en Montevideo (cuentas de Instagram, búsquedas en Google, carteleras de teatros y ticketeras). Confirmamos que la oferta es amplia pero está muy dispersa, y que los algoritmos de redes sociales tienden a encerrar a cada usuario en lo que ya conoce.
 
 ---
 
@@ -229,13 +230,13 @@ Para fundamentar el diseño de **CULTURAMA** se adoptó un enfoque metodológico
 
 ### Hallazgos Clave que Fundamentan el Proyecto
 
-Del análisis comparativo de las entrevistas emergen patrones contundentes que sustentan las decisiones arquitectónicas y de requisitos de CULTURAMA:
+Del análisis de las entrevistas identificamos patrones claros que fundamentan las decisiones de CULTURAMA:
 
-1. **La Paradoja de la Fragmentación y el Descubrimiento Tardío:** Los tres participantes coinciden en que Montevideo ofrece una nutrida agenda cultural, pero la información está atomizada entre cuentas de redes sociales, sitios web institucionales y boleterías. Esto provoca que el usuario se entere de eventos de interés _cuando ya concluyeron_.
-2. **El Encierro Algorítmico y la Zona de Confort:** Los usuarios reconocen estar atrapados en un bucle repetitivo. Si a un usuario le gusta un género musical (ej. electrónica), las redes sociales sólo le sugieren contenido similar, impidiéndole tomar contacto con teatro, danza o festivales públicos.
-3. **Validación del Descubrimiento Relacionado ("Puente Cultural"):** Los entrevistados manifestaron una excelente recepción a propuestas que los saquen de su zona de confort, **siempre y cuando se explicite el motivo del vínculo** (ej. _“Te recomendamos esta muestra fotográfica porque disfrutás de eventos de arquitectura”_).
-4. **Fricción por Falta de Información Logística:** Un evento sin precio explícito, fecha clara, zona geográfica delimitada o enlace directo de compra es descartado de inmediato por falta de tiempo para investigar.
-5. **Gamificación con Recompensas Tangibles:** Tanto el público joven como el adulto joven valoraron positivamente un esquema de "desafíos culturales" (retos semanales) con acumulación de puntos, condicionando su atractivo a que se traduzcan en beneficios concretos (descuentos en entradas, consumiciones o accesos prioritarios).
+1. **Información dispersa y avisos a destiempo:** Los tres participantes coincidieron en que Montevideo tiene mucha oferta cultural, pero al estar desparramada en redes, páginas web y ticketeras, muchas veces se enteran de las cosas _cuando ya pasaron_.
+2. **Burbuja de intereses y rutina:** Los usuarios reconocen que tienden a repetir siempre los mismos planes. Las redes sociales solo refuerzan esto, recomendándoles únicamente cosas parecidas a las que ya siguen.
+3. **Interés en salir de la rutina con una explicación clara ("Puente Cultural"):** Tuvieron muy buena recepción a la idea de probar actividades nuevas, **siempre y cuando la aplicación les explique el porqué** (ej. _“Te recomendamos esta muestra fotográfica porque te interesan los eventos de arquitectura”_).
+4. **Falta de datos prácticos clave:** Si una publicación no aclara de entrada el precio, el horario exacto, el lugar o cómo sacar la entrada, la gente no pierde tiempo buscando y directamente descarta el plan.
+5. **Motivación con desafíos y beneficios concretos:** Gustó mucho la propuesta de sumar puntos completando retos culturales semanales, especialmente si se pueden canjear por descuentos, 2x1 o consumiciones.
 
 ---
 
@@ -243,7 +244,7 @@ Del análisis comparativo de las entrevistas emergen patrones contundentes que s
 
 ### Técnica de Priorización: MoSCoW
 
-Se adoptó el método **MoSCoW** para categorizar los requerimientos en función de su criticidad para el valor del negocio y la viabilidad del obligatorio:
+Se adoptó el método **MoSCoW** para categorizar los requerimientos en función de su importancia para el valor del proyecto y la viabilidad del obligatorio:
 
 - **Must Have (Debe tener):** Requisitos obligatorios e indispensables para que el sistema funcione y cumpla su propuesta central.
 - **Should Have (Debería tener):** Requisitos de alto valor que enriquecen significativamente la experiencia del usuario, pero cuya ausencia no bloquea la entrega inicial.
@@ -252,20 +253,20 @@ Se adoptó el método **MoSCoW** para categorizar los requerimientos en función
 
 ### Requisitos Funcionales (RF)
 
-| ID        | Requisito Funcional                                                                                                                                                                                                                                | Actor             | Prioridad MoSCoW | Justificación                                                                                                                                        |
-| :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------- | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **RF-01** | **Exploración y Filtrado Multicriterio:** El sistema debe permitir explorar eventos filtrando por fecha, rango de precios, barrio/zona de Montevideo y categoría cultural.                                                                         | Usuario           |  **Must Have**   | Resuelve el problema número uno manifestado en las entrevistas: la dispersión y la dificultad para hallar planes según disponibilidad y presupuesto. |
-| **RF-02** | **Ficha Detallada del Evento:** El sistema debe presentar la información logística completa de cada evento: título, descripción, fecha/horario, ubicación física con mapa, costo, organizador y enlace directo de adquisición.                     | Usuario           |  **Must Have**   | Elimina la fricción de búsqueda señalada por los usuarios de 30 y 40 años que abandonan si la información no es transparente y completa.             |
-| **RF-03** | **Taxonomía Cultural Estructurada:** El sistema debe clasificar los eventos en al menos 6 categorías principales (Música, Artes Escénicas, Audiovisual, Artes Visuales, Patrimonio y Ciudad, Cultura y Comunidad) y sus respectivas subcategorías. | Sistema / Admin   |  **Must Have**   | Permite modelar formalmente la afinidad y los puentes de recomendación interdisciplinarios.                                                          |
-| **RF-04** | **Recomendación por Afinidad Habitual:** El sistema debe sugerir eventos alineados con las preferencias e historial declarado del usuario (ej. si prefiere electrónica, sugerir eventos afines).                                                   | Usuario / Sistema |  **Must Have**   | Garantiza que el usuario encuentre inmediatamente lo que busca y confíe en la pertinencia de la plataforma.                                          |
-| **RF-05** | **Descubrimiento Guiado ("Fuera de la Zona de Confort"):** El sistema debe recomendar eventos de categorías ajenas al consumo habitual del usuario, acompañados de una explicación contextualizada del motivo de la sugerencia (puente cultural).  | Usuario / Sistema |  **Must Have**   | Es el núcleo innovador y diferenciador de CULTURAMA, validado ampliamente en las entrevistas.                                                        |
-| **RF-06** | **Sistema de Desafíos Culturales:** El sistema debe ofrecer misiones periódicas al usuario (ej. “Asiste a una obra de teatro independiente este mes”) asignando puntos al completarlas.                                                            | Usuario / Sistema | **Should Have**  | Gamifica el descubrimiento y combate la resistencia a probar disciplinas desconocidas.                                                               |
-| **RF-07** | **Billetera de Puntos y Canje de Beneficios:** El sistema debe llevar el saldo acumulado de puntos del usuario y mostrar un catálogo de beneficios canjeables (descuentos en entradas, 2x1).                                                       | Usuario           | **Should Have**  | Cierra el ciclo de incentivos tangibles demandado por los perfiles de 20 y 30 años.                                                                  |
-| **RF-08** | **Marcado de Eventos Favoritos / Guardados:** El sistema debe permitir al usuario marcar eventos como guardados para consultarlos posteriormente en su agenda personal.                                                                            | Usuario           | **Should Have**  | Reduce la pérdida de eventos por olvido o falta de tiempo al momento del descubrimiento.                                                             |
-| **RF-09** | **Reseñas y Valoraciones Comunitarias:** El sistema debe permitir a los usuarios calificar eventos a los que asistieron y dejar breves comentarios u opiniones.                                                                                    | Usuario           |  **Could Have**  | Aporta prueba social, destacada por Carolina (40 años) como factor de confianza.                                                                     |
-| **RF-10** | **Perfil y Gestión de Preferencias Culturales:** El sistema debe permitir al usuario configurar y modificar sus géneros e intereses de cabecera en cualquier momento.                                                                              | Usuario           | **Should Have**  | Permite calibrar la precisión del motor de afinidad y de descubrimiento no habitual.                                                                 |
-| **RF-11** | **Gestión y Carga de Eventos:** El sistema debe permitir a administradores/productores registrar, editar y dar de baja eventos culturales en la cartelera.                                                                                         | Administrador     |  **Must Have**   | Condición sine qua non para mantener la cartelera actualizada y con datos reales.                                                                    |
-| **RF-12** | **Notificaciones de Eventos Próximos:** El sistema enviará recordatorios automáticos de eventos guardados con 24 horas de antelación.                                                                                                              | Usuario           |  **Won't Have**  | Postergado para versiones futuras para evitar saturación de notificaciones (queja advertida por Martín).                                             |
+| ID        | Requisito Funcional                                                                                                                                                                                                                                | Actor             | Prioridad MoSCoW | Justificación                                                                                                                                |
+| :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------- | :--------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| **RF-01** | **Exploración y Filtrado Multicriterio:** El sistema debe permitir explorar eventos filtrando por fecha, rango de precios, barrio/zona de Montevideo y categoría cultural.                                                                         | Usuario           |  **Must Have**   | Resuelve el problema principal de las entrevistas: la dispersión de información y la dificultad para encontrar planes por fecha y presupuesto. |
+| **RF-02** | **Ficha Detallada del Evento:** El sistema debe presentar la información logística completa de cada evento: título, descripción, fecha/horario, ubicación física con mapa, costo, organizador y enlace directo de adquisición.                     | Usuario           |  **Must Have**   | Evita que el usuario abandone la búsqueda si no encuentra rápido el precio, horario, ubicación o compra de entradas.                         |
+| **RF-03** | **Taxonomía Cultural Estructurada:** El sistema debe clasificar los eventos en al menos 6 categorías principales (Música, Artes Escénicas, Audiovisual, Artes Visuales, Patrimonio y Ciudad, Cultura y Comunidad) y sus respectivas subcategorías. | Sistema / Admin   |  **Must Have**   | Permite organizar la oferta cultural y relacionar disciplinas para sugerir cruces temáticos interesantes.                                   |
+| **RF-04** | **Recomendación por Afinidad Habitual:** El sistema debe sugerir eventos alineados con las preferencias e historial declarado del usuario (ej. si prefiere electrónica, sugerir eventos afines).                                                   | Usuario / Sistema |  **Must Have**   | Asegura que el usuario encuentre fácilmente lo que busca y confíe en la aplicación.                                                          |
+| **RF-05** | **Descubrimiento Guiado ("Fuera de la Zona de Confort"):** El sistema debe recomendar eventos de categorías ajenas al consumo habitual del usuario, acompañados de una explicación contextualizada del motivo de la sugerencia (puente cultural).  | Usuario / Sistema |  **Must Have**   | Es la propuesta central y diferenciadora de CULTURAMA, respaldada por las entrevistas.                                                       |
+| **RF-06** | **Sistema de Desafíos Culturales:** El sistema debe ofrecer misiones periódicas al usuario (ej. “Asiste a una obra de teatro independiente este mes”) asignando puntos al completarlas.                                                            | Usuario / Sistema | **Should Have**  | Gamifica la exploración y anima al usuario a probar disciplinas que no suele frecuentar.                                                     |
+| **RF-07** | **Billetera de Puntos y Canje de Beneficios:** El sistema debe llevar el saldo acumulado de puntos del usuario y mostrar un catálogo de beneficios canjeables (descuentos en entradas, 2x1).                                                       | Usuario           | **Should Have**  | Le da un fin concreto a los puntos acumulados mediante beneficios y descuentos.                                                              |
+| **RF-08** | **Marcado de Eventos Favoritos / Guardados:** El sistema debe permitir al usuario marcar eventos como guardados para consultarlos posteriormente en su agenda personal.                                                                            | Usuario           | **Should Have**  | Permite guardar planes de interés para revisarlos más tarde sin perderlos.                                                                   |
+| **RF-09** | **Reseñas y Valoraciones Comunitarias:** El sistema debe permitir a los usuarios calificar eventos a los que asistieron y dejar breves comentarios u opiniones.                                                                                    | Usuario           |  **Could Have**  | Aporta opiniones y valoraciones de otros usuarios, factor que brinda confianza antes de ir.                                                  |
+| **RF-10** | **Perfil y Gestión de Preferencias Culturales:** El sistema debe permitir al usuario configurar y modificar sus géneros e intereses de cabecera en cualquier momento.                                                                              | Usuario           | **Should Have**  | Permite al usuario ajustar sus gustos para calibrar las sugerencias.                                                                         |
+| **RF-11** | **Gestión y Carga de Eventos:** El sistema debe permitir a administradores/productores registrar, editar y dar de baja eventos culturales en la cartelera.                                                                                         | Administrador     |  **Must Have**   | Indispensable para mantener la cartelera actualizada y con eventos reales.                                                                   |
+| **RF-12** | **Notificaciones de Eventos Próximos:** El sistema enviará recordatorios automáticos de eventos guardados con 24 horas de antelación.                                                                                                              | Usuario           |  **Won't Have**  | Se posterga para más adelante para evitar saturar al usuario con notificaciones.                                                             |
 
 ### Requisitos No Funcionales (RNF)
 
@@ -341,52 +342,203 @@ flowchart LR
     Admin --> UC05[UC-05: Gestionar Eventos y Categorías]
 ```
 
-#### UC-01: Explorar y Filtrar Cartelera de Eventos
+#### Matriz de Trazabilidad: Casos de Uso ➔ Requisitos
 
-- **Actor Principal:** Usuario registrado o invitado.
-- **Precondición:** El usuario accede a la plataforma CULTURAMA y existen eventos cargados en el sistema.
-- **Flujo Principal:**
-  1. El usuario accede a la pantalla de exploración.
-  2. El sistema muestra la lista de eventos destacados organizados por fecha y categoría.
-  3. El usuario aplica filtros combinados: rango de fecha (hoy, este fin de semana), zona (Cordón, Parque Rodó, Ciudad Vieja, etc.), precio (gratis, pago con tope) y categoría (Música, Teatro, etc.).
-  4. El sistema valida los parámetros y refresca la vista mostrando las tarjetas de los eventos coincidentes.
-  5. El usuario selecciona una tarjeta de evento.
-  6. El sistema presenta la ficha completa con horario, mapa interactivo, sinopsis y botón de redirección para compra de entradas.
-- **Flujos Alternativos:**
-  - _4a. Sin coincidencias:_ El sistema notifica al usuario que no hay eventos para los criterios especificados y ofrece sugerencias cercanas en fecha o ubicación.
-
-#### UC-02: Descubrimiento Cultural Guiado ("Fuera de la Zona de Confort")
-
-- **Actor Principal:** Usuario registrado.
-- **Precondición:** El usuario cuenta con un perfil con historial de afinidades o preferencias seleccionadas.
-- **Flujo Principal:**
-  1. El usuario navega a la pestaña "Descubrimiento / Fuera de tu Zona".
-  2. El sistema analiza las categorías más consumidas por el usuario y selecciona eventos en categorías con frecuencia de consumo nula o baja, pero con vínculos temáticos identificados.
-  3. El sistema renderiza las propuestas destacando visualmente la tarjeta de "Puente Cultural" (ej. _“Porque te interesa la Fotografía, te recomendamos esta exposición sobre Arquitectura Moderna”_).
-  4. El usuario interactúa con la propuesta (guarda el evento o abre el detalle para ver indicaciones de transporte y precios).
-- **Flujos Alternativos:**
-  - _2a. Usuario sin historial previo:_ El sistema solicita seleccionar al menos 2 categorías de interés inicial para calibrar las recomendaciones o presenta una selección curada variada.
-
-#### UC-03: Completar Desafío Cultural y Canjear Puntos
-
-- **Actor Principal:** Usuario registrado.
-- **Precondición:** El usuario ha acumulado puntos en su billetera cultural mediante la participación en desafíos.
-- **Flujo Principal:**
-  1. El usuario ingresa a la sección "Desafíos y Recompensas".
-  2. El sistema muestra los desafíos vigentes y el catálogo de beneficios disponibles según el saldo de puntos.
-  3. El usuario selecciona un beneficio disponible (ej. 20% de descuento en teatro independiente por 200 puntos).
-  4. El sistema verifica que el saldo sea suficiente, deduce los puntos de la billetera y genera un código promocional único de canje.
-- **Flujos Alternativos:**
-  - _3a. Puntos insuficientes:_ El sistema informa cuántos puntos faltan y sugiere qué eventos o desafíos realizar para alcanzarlos.
+| Caso de Uso | Nombre | Requisitos Funcionales (RF) | Requisitos No Funcionales (RNF) |
+| :--- | :--- | :--- | :--- |
+| **UC-01** | Explorar y Filtrar Cartelera de Eventos | RF-01, RF-02, RF-03 | RNF-01, RNF-02, RNF-04 |
+| **UC-02** | Descubrimiento Cultural Guiado ("Fuera de la Zona de Confort") | RF-03, RF-04, RF-05, RF-10 | RNF-01, RNF-02 |
+| **UC-03** | Activar Desafío Cultural y Canjear Puntos | RF-06, RF-07 | RNF-01 |
+| **UC-04** | Guardar Evento en Favoritos | RF-02, RF-08 | RNF-01, RNF-03 |
+| **UC-05** | Gestionar Eventos y Categorías | RF-03, RF-11 | RNF-03, RNF-06 |
 
 ---
 
-### Bocetos de Interfaz de Usuario (UI Preview / Prototipo)
+### Use Case 1
 
-Para tangibilizar los casos de uso y evaluar la experiencia del usuario de manera temprana, el equipo diseñó e implementó un prototipo visual interactivo (**UI Preview**) de **CULTURAMA**.
+**Identificador:** UC-01
 
-> **Aclaración sobre el uso de Inteligencia Artificial:**  
-> Para la concepción estética, la maquetación de componentes y la generación de este **UI / preview**, el equipo utilizó herramientas de **Inteligencia Artificial Generativa**. La IA se utilizó como acelerador de diseño para explorar esquemas cromáticos, jerarquías visuales y composición de layouts modernos, facilitando la visualización inmediata del flujo de navegación propuesto antes de la codificación definitiva de la capa de interfaz.
+**Requerimientos asociados:** RF-01 (Exploración y Filtrado Multicriterio), RF-02 (Ficha Detallada del Evento), RF-03 (Taxonomía Cultural Estructurada), RNF-01 (Usabilidad), RNF-02 (Rendimiento)
+
+**Nombre:** Explorar y Filtrar Cartelera de Eventos
+
+**Descripción:** El usuario consulta la cartelera cultural aplicando filtros por fecha, precio, barrio y categoría para encontrar actividades según sus intereses y disponibilidad.
+
+**Actores:**
+
+- Usuario (registrado o invitado)
+
+**Precondiciones:**
+
+- El usuario ingresa a la plataforma CULTURAMA y existen eventos cargados en el sistema.
+
+**Post condiciones:**
+
+- El sistema lista los eventos coincidentes y permite visualizar la ficha con los detalles de la actividad seleccionada.
+
+**Secuencia normal**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 1 | El usuario ingresa a la pantalla de cartelera / exploración. | Muestra la lista de eventos culturales organizados por fecha y destacados. |
+| 2 | El usuario selecciona filtros por fecha, zona, precio o categoría cultural. | Valida los parámetros y actualiza la vista mostrando las tarjetas de los eventos coincidentes. |
+| 3 | El usuario selecciona una tarjeta de evento. | Despliega la ficha con la información completa del evento (horarios, mapa, costos y enlace de compra). |
+
+**Secuencia alternativa**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 2.1 | Si no se encuentran eventos para los filtros seleccionados | El sistema informa la falta de coincidencias y sugiere ampliar el rango de búsqueda o quitar filtros. |
+
+---
+
+### Use Case 2
+
+**Identificador:** UC-02
+
+**Requerimientos asociados:** RF-03 (Taxonomía Cultural Estructurada), RF-04 (Recomendación por Afinidad Habitual), RF-05 (Descubrimiento Guiado Fuera de Zona de Confort), RF-10 (Perfil y Preferencias), RNF-01 (Usabilidad)
+
+**Nombre:** Descubrimiento Cultural Guiado ("Fuera de la Zona de Confort")
+
+**Descripción:** El usuario explora sugerencias en disciplinas ajenas a su consumo habitual, visualizando la explicación del "puente cultural" para animarse a probar actividades nuevas.
+
+**Actores:**
+
+- Usuario registrado
+
+**Precondiciones:**
+
+- El usuario cuenta con un perfil con historial de afinidades o preferencias seleccionadas.
+
+**Post condiciones:**
+
+- El usuario visualiza propuestas fuera de su rutina con la justificación del vínculo y puede guardarlas o consultar sus detalles.
+
+**Secuencia normal**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 1 | El usuario ingresa a la sección "Descubrimiento / Fuera de tu Zona". | Analiza las categorías consumidas y selecciona eventos en disciplinas no habituales con cruces temáticos afines. |
+| 2 | El usuario revisa las propuestas sugeridas. | Renderiza las tarjetas destacando la etiqueta de "Puente Cultural" y el motivo de la recomendación. |
+| 3 | El usuario interactúa con la propuesta seleccionando el evento. | Muestra el detalle completo de la actividad con datos de acceso y precios. |
+
+**Secuencia alternativa**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 1.1 | Si el usuario no cuenta con historial de gustos o preferencias previas | El sistema solicita seleccionar al menos un interés inicial para calibrar las sugerencias o muestra una selección variada. |
+| 2.1 | Si el usuario presiona "No me interesa ahora" en una propuesta | El sistema descarta esa sugerencia y muestra una alternativa de otra categoría. |
+
+---
+
+### Use Case 3
+
+**Identificador:** UC-03
+
+**Requerimientos asociados:** RF-06 (Sistema de Desafíos Culturales), RF-07 (Billetera de Puntos y Canje de Beneficios), RNF-01 (Usabilidad)
+
+**Nombre:** Activar Desafío Cultural y Canjear Puntos
+
+**Descripción:** El usuario consulta los desafíos culturales activos y canjea los puntos acumulados por beneficios concretos en entradas o consumiciones.
+
+**Actores:**
+
+- Usuario registrado
+
+**Precondiciones:**
+
+- El usuario tiene una cuenta activa y ha acumulado puntos en su billetera cultural mediante desafíos.
+
+**Post condiciones:**
+
+- Se descuentan los puntos del saldo del usuario y se genera un código de beneficio para su utilización.
+
+**Secuencia normal**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 1 | El usuario ingresa a la sección "Desafíos y Recompensas". | Muestra los desafíos vigentes y el catálogo de beneficios disponibles según el saldo de puntos. |
+| 2 | El usuario selecciona un beneficio disponible para canjear. | Verifica que el saldo de puntos sea suficiente y solicita confirmación de la operación. |
+| 3 | El usuario confirma el canje. | Deduce los puntos de la billetera y genera un código promocional único de canje. |
+
+**Secuencia alternativa**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 2.1 | Si el usuario no cuenta con puntos suficientes para el beneficio elegido | El sistema indica cuántos puntos restan y sugiere qué eventos o desafíos completar para alcanzarlos. |
+
+---
+
+### Use Case 4
+
+**Identificador:** UC-04
+
+**Requerimientos asociados:** RF-02 (Ficha Detallada del Evento), RF-08 (Marcado de Eventos Favoritos / Guardados), RNF-01 (Usabilidad), RNF-03 (Confiabilidad y Actualización)
+
+**Nombre:** Guardar Evento en Favoritos
+
+**Descripción:** El usuario marca un evento de su interés como guardado para tenerlo accesible rápidamente en su agenda personal sin tener que buscarlo nuevamente.
+
+**Actores:**
+
+- Usuario (registrado o invitado)
+
+**Precondiciones:**
+
+- El usuario está navegando la cartelera o las recomendaciones y visualiza un evento de su interés.
+
+**Post condiciones:**
+
+- El evento queda almacenado en la lista de favoritos del usuario y se actualiza el contador de la barra superior.
+
+**Secuencia normal**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 1 | El usuario presiona el botón de estrella / favorito en la tarjeta del evento. | Agrega el evento a la colección personal y resalta visualmente el estado guardado. |
+| 2 | El usuario accede a la pestaña "Favoritos". | Despliega la colección de eventos guardados permitiendo consultar sus detalles o removerlos. |
+
+**Secuencia alternativa**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 1.1 | Si el evento ya se encontraba en favoritos al presionar la estrella | El sistema desmarca el evento, lo remueve de la lista de favoritos y descuenta el contador. |
+
+---
+
+### Use Case 5
+
+**Identificador:** UC-05
+
+**Requerimientos asociados:** RF-03 (Taxonomía Cultural Estructurada), RF-11 (Gestión y Carga de Eventos), RNF-03 (Actualización y Confiabilidad), RNF-06 (Seguridad y Validación)
+
+**Nombre:** Gestionar Eventos y Categorías
+
+**Descripción:** El administrador registra, modifica o da de baja eventos y categorías culturales para mantener la cartelera actualizada y completa.
+
+**Actores:**
+
+- Administrador
+
+**Precondiciones:**
+
+- El administrador cuenta con permisos de acceso al panel de administración del sistema.
+
+**Post condiciones:**
+
+- Los cambios en los eventos o categorías quedan guardados y reflejados en la plataforma para los usuarios.
+
+**Secuencia normal**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 1 | El administrador ingresa a la sección de administración de eventos. | Muestra la lista de eventos registrados y las opciones para crear, editar o eliminar. |
+| 2 | El administrador completa los datos del evento (título, categoría, fecha, horario, ubicación, costo y enlace) y presiona "Guardar". | Valida los datos ingresados, persiste el evento y actualiza la cartelera. |
+
+**Secuencia alternativa**
+| # | Acción (actor) | Reacción (sistema) |
+| - | ------------------------------ | ------------------------------ |
+| 2.1 | Si faltan datos obligatorios o la fecha de inicio es anterior a la fecha actual | El sistema muestra los mensajes de error correspondientes y no guarda los cambios hasta su corrección. |
+
+---
+
+### Prototipo Visual e Interfaz de Usuario (UI Preview)
+
+Para bajar a tierra los casos de uso y tener una vista previa de la experiencia de usuario antes de programar la interfaz completa, armamos un prototipo visual interactivo (**UI Preview**) de **CULTURAMA**.
+
+> **Uso de Inteligencia Artificial en el prototipo:**  
+> Para explorar ideas de diseño, combinar colores y definir la estructura del prototipo, nos apoyamos en **Google Gemini** como modelo de lenguaje (LLM). Nos sirvió para probar variantes de forma rápida antes de pasar al desarrollo de la interfaz definitiva.
 
 A continuación se detallan las **5 pantallas y componentes centrales** que componen la interfaz de usuario de la plataforma:
 
@@ -451,44 +603,44 @@ A continuación se detallan las **5 pantallas y componentes centrales** que comp
 
 ### Verificación
 
-La verificación se concentró en constatar que los artefactos generados fueron construidos de manera rigurosa, completa y consistente con los lineamientos metodológicos de la materia:
+Revisamos que los requerimientos y artefactos del proyecto estuvieran bien definidos, completos y alineados con las pautas del curso:
 
-- **Revisión de Requisitos Funcionales y No Funcionales:** Se utilizó una lista de chequeo (_checklist_) para garantizar que cada requisito sea atómico, trazable mediante identificador unívoco, libre de ambigüedad léxica y con prioridad justificada mediante MoSCoW.
-- **Cumplimiento de Criterios INVEST en User Stories:**
-  - **I (Independientes):** Cada historia (ej. US-01 frente a US-02) puede desarrollarse y testearse sin acoplamientos rígidos con otras.
-  - **N (Negociables):** Describen qué valor requiere el usuario, permitiendo adaptar los detalles de implementación durante los sprints.
-  - **V (Valiosas):** Cada historia entrega valor directo percibido por el usuario final (ahorro de tiempo, ampliación cultural, recompensas).
-  - **E (Estimables):** Poseen un alcance acotado y previsible en esfuerzo de desarrollo para el equipo de dos integrantes.
-  - **S (Small / Pequeñas):** Cada historia puede implementarse y verificarse dentro de una iteración corta.
-  - **T (Testeables):** Se incorporaron criterios de aceptación formales (_Dado / Cuando / Entonces_) que determinan objetivamente su éxito.
+- **Checklist de Requisitos:** Verificamos que cada requisito funcional y no funcional estuviera identificado con un código único, redactado sin ambigüedades y con su prioridad justificada mediante MoSCoW.
+- **Criterios INVEST en User Stories:**
+  - **I (Independientes):** Cada historia puede desarrollarse y probarse por separado sin bloqueos con las demás.
+  - **N (Negociables):** Definen el valor esperado para el usuario, dejando margen para ajustar detalles técnicos durante el desarrollo.
+  - **V (Valiosas):** Aportan un beneficio directo y concreto al usuario final (ahorrar tiempo, descubrir actividades nuevas, sumar puntos).
+  - **E (Estimables):** Tienen un alcance acotado y viable para desarrollar entre los dos integrantes del equipo.
+  - **S (Small / Pequeñas):** Son lo suficientemente chicas para completarse dentro de una iteración de trabajo.
+  - **T (Testeables):** Cuentan con criterios de aceptación claros en formato _Dado / Cuando / Entonces_ para verificar su funcionamiento.
 
 ### Validación
 
-La validación evaluó si el sistema diseñado resuelve de manera efectiva el problema del usuario en el mundo real:
+Comprobamos si las soluciones propuestas para CULTURAMA responden efectivamente a los problemas reales detectados en las entrevistas:
 
-- **Validación con Usuarios Entrevistados:** Se contrastaron las soluciones propuestas en CULTURAMA con las respuestas recabadas:
-  - _Sofía (20 años):_ Validó que un sistema de puntos y retos grupales es el único incentivo efectivo para convencerla de probar teatro o danza en vez de salidas nocturnas repetitivas.
-  - _Martín (30 años):_ Confirmó que tener filtros ágiles de precio, horario y zona en una única plataforma resuelve su necesidad de "resolver rápido" su tiempo libre.
-  - _Carolina (40 años):_ Respaldó que la centralización evita enterarse de eventos "cuando ya pasaron" y que la explicación de las recomendaciones genera confianza para probar actividades nuevas.
-- **Matriz de Trazabilidad Necesidad ➔ Requisito:**
-  - _Problema:_ Dispersión de información en redes sociales ➔ **Solución:** RF-01, RF-02, RF-03 (Catálogo unificado y filtrado geográfico).
-  - _Problema:_ Encierro algorítmico / Burbuja de recomendación ➔ **Solución:** RF-05 (Motor de descubrimiento con puente cultural).
-  - _Problema:_ Desidia o inercia a repetir siempre lo mismo ➔ **Solución:** RF-06, RF-07 (Desafíos y canje de puntos).
+- **Contraste con las entrevistas:**
+  - _Sofía (20 años):_ El sistema de desafíos y puntos responde a su necesidad de tener un incentivo concreto para animarse a probar teatro o danza en vez de repetir salidas.
+  - _Martín (30 años):_ Los filtros rápidos por precio, zona y horario resuelven su falta de tiempo para buscar opciones en la semana.
+  - _Carolina (40 años):_ La cartelera centralizada y las recomendaciones explicadas resuelven su queja de enterarse tarde y le dan confianza para probar cosas nuevas.
+- **Relación Problema ➔ Solución:**
+  - _Problema:_ Información desparramada en redes sociales ➔ **Solución:** RF-01, RF-02, RF-03 (Catálogo unificado y filtrado por zona/fecha).
+  - _Problema:_ Quedarse siempre en lo mismo por los algoritmos ➔ **Solución:** RF-05 (Recomendaciones fuera de la zona de confort con puente cultural).
+  - _Problema:_ Falta de incentivo para probar disciplinas desconocidas ➔ **Solución:** RF-06, RF-07 (Desafíos y canje de puntos).
 
 ---
 
 ## Uso de Herramientas de IA
 
-Para la elaboración de este informe académico y el desarrollo inicial del proyecto se emplearon herramientas de Inteligencia Artificial Generativa bajo pautas éticas y de buenas prácticas profesionales:
+Durante esta primera etapa del proyecto usamos herramientas de Inteligencia Artificial Generativa como apoyo de trabajo, manteniendo siempre la autoría y el criterio propio en cada decisión:
 
-- **Herramientas Empleadas:** Asistentes basados en Modelos de Lenguaje (LLMs) y herramientas de asistencia en diseño/prototipado de interfaces.
-- **Alcance de su Utilización:**
-  - **Generación de UI / Preview:** Utilización de IA generativa para maquetar, estructurar visualmente y producir un preview funcional de la interfaz de usuario de CULTURAMA, acelerando la exploración de paletas de colores, tipografías y distribución de componentes interactivos (home, similares, cartelera, onboarding y favoritos).
-  - **Estructuración y Redacción:** Asistencia en la estructuración gramatical y síntesis formal del informe académico.
-  - **Diagramación Conceptual:** Apoyo en la generación de diagramas en sintaxis Mermaid para modelar el dominio y los casos de uso.
-- **Buenas Prácticas Seguidas:**
-  - **Validación y Juicio Humano:** Todo diseño de interfaz, preview generado, sugerencia técnica o priorización fue revisado, ajustado y validado críticamente por Nahuel Ximeno y Lautaro Moreno. Ningún componente fue incorporado sin verificación directa del equipo.
-  - **Transparencia y Autoría Intelectual:** La concepción central de CULTURAMA, la conducción presencial de las entrevistas cualitativas y las decisiones arquitectónicas de software son autoría integral de los integrantes del equipo.
+- **Herramientas utilizadas:** Como modelo de lenguaje principal (LLM) utilizamos **Google Gemini**, complementado con herramientas de asistencia visual para el armado del prototipo.
+- **En qué la aplicamos:**
+  - **Diseño y prototipo de UI:** Nos apoyamos en Gemini para maquetar y estructurar el prototipo interactivo de CULTURAMA, evaluando combinaciones de colores, tipografías y ordenando los componentes principales (home, recomendaciones, cartelera completa, preferencias y favoritos).
+  - **Redacción y estructura del informe:** Usamos la herramienta para revisar la claridad de las explicaciones, pulir la redacción y organizar las secciones del documento.
+  - **Diagramación:** Apoyo en la generación de código Mermaid para los diagramas de casos de uso y modelo de dominio.
+- **Buenas prácticas y control humano:**
+  - **Revisión y validación propia:** Ningún texto, diagrama o componente visual se incorporó sin que Nahuel Ximeno y Lautaro Moreno lo revisáramos, adaptáramos y validáramos críticamente.
+  - **Autoría del proyecto:** La idea de CULTURAMA, la realización presencial de las entrevistas y las decisiones sobre qué requisitos incluir son de total autoría del equipo.
 
 ---
 
@@ -496,18 +648,18 @@ Para la elaboración de este informe académico y el desarrollo inicial del proy
 
 ### Dinámica de Trabajo y Comunicación
 
-Como equipo conformado por dos integrantes, Nahuel Ximeno y Lautaro Moreno, establecimos un canal de comunicación continuo a través de 4 reuniones presenciales y coordinación virtual frecuente. La división equitativa de responsabilidades (11.0 horas registradas por persona) permitió abordar conjuntamente la investigación de campo, la ingeniería de requerimientos y la infraestructura de control de versiones.
+Como equipo de dos personas (Nahuel Ximeno y Lautaro Moreno), mantuvimos una comunicación fluida a través de 5 reuniones de trabajo (presenciales y virtuales) y coordinación frecuente. Nos dividimos la dedicación en partes iguales (13 horas cada uno), participando ambos tanto en las entrevistas y el análisis como en la definición de requisitos, la configuración de Git y las sesiones de ajuste y refinamiento del informe.
 
 ### Dificultades y Desafíos Encontrados
 
-- **Definición del Alcance Inicial:** En las etapas tempranas de ideación surgieron ideas de alta complejidad técnica (ej. ticketing integrado propio con pasarelas de pago bancarias locales, geolocalización en tiempo real vía GPS en segundo plano). La aplicación del método MoSCoW resultó clave para descartar funcionalidades no esenciales y concentrarse en el valor diferenciador: **el descubrimiento guiado fuera de la zona de confort**.
-- **Equilibrio en el Motor de Recomendaciones:** Un desafío conceptual relevante fue evitar recomendar propuestas tan radicalmente disonantes que provocaran rechazo inmediato en el usuario. Se aprendió que el concepto de "puente cultural" (conectar intereses conocidos con disciplinas afines) es indispensable para que la recomendación sea aceptada.
+- **Acotar el alcance inicial:** Al principio pensamos en funciones de bastante complejidad (como venta directa de entradas con pasarelas de pago o geolocalización en tiempo real con GPS). Usar la técnica MoSCoW fue fundamental para descartar lo que no era prioritario y enfocarnos en el valor diferencial: **el descubrimiento guiado fuera de la zona de confort**.
+- **Lograr recomendaciones equilibradas:** Un punto clave fue evitar sugerir cosas tan lejanas que generaran rechazo en el usuario. Aprendimos que el concepto de "puente cultural" (explicar la conexión entre lo conocido y la nueva disciplina) es indispensable para que la recomendación sea atractiva.
 
 ### Qué Funcionó Bien y Qué No
 
-- **Aspectos Positivos:** La realización de entrevistas semiestructuradas a tres franjas etarias bien diferenciadas enriqueció notablemente la especificación de requisitos, dotándola de fundamentos reales y evitando suposiciones arbitrarias del equipo. Asimismo, la disciplina en el manejo de Git desde el día uno (`main`, `DevNahuel`, `DevLautaro`) sentó una base sólida para el trabajo colaborativo.
-- **Aspectos a Mejorar:** La desgrabación y análisis cualitativo de entrevistas demandó más tiempo del previsto originalmente, lo que comprimió la agenda de modelado de dominio hacia los días finales de la entrega. Para las siguientes fases se calendarizarán márgenes temporales de contingencia.
+- **Lo que funcionó bien:** Las entrevistas a personas de diferentes edades nos dieron una base real sobre cómo se busca y consume cultura en Montevideo, evitando que tomáramos decisiones basadas en suposiciones. También nos sirvió mucho organizar el repositorio Git desde el inicio (`main`, `DevNahuel`, `DevLautaro`), lo que nos permitió avanzar en paralelo sin pisarnos el trabajo.
+- **Aspectos a mejorar:** Transcribir y analizar las entrevistas nos llevó más tiempo del esperado, lo que nos dejó con menos margen para cerrar el modelo de dominio hacia el final. Para las próximas entregas vamos a planificar mejor los tiempos de estas tareas cualitativas.
 
 ### Lecciones Aprendidas
 
-Esta etapa inicial evidenció que un software de calidad no inicia con código, sino con una rigurosa comprensión del problema humano a resolver. Las herramientas de ingeniería de software (MoSCoW, INVEST, diagramas de dominio) demostraron ser facilitadores indispensables para transformar una idea abstracta en un producto viable, coherente y listo para su desarrollo e implementación.
+Esta primera etapa nos dejó en claro que el desarrollo de software empieza mucho antes de programar. Entender a fondo los problemas reales de los usuarios y aplicar herramientas claras (como MoSCoW, historias INVEST y modelos de dominio) nos ayudó a transformar una idea abstracta en un proyecto concreto, ordenado y listo para ser desarrollado.
