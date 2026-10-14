@@ -793,7 +793,7 @@ Durante esta primera etapa del proyecto usamos herramientas de Inteligencia Arti
 
 ### Dinámica de Trabajo y Comunicación
 
-Como equipo de dos personas (Nahuel Ximeno y Lautaro Moreno), mantuvimos una comunicación fluida a través de 5 reuniones de trabajo (presenciales y virtuales) y coordinación frecuente. Nos dividimos la dedicación en partes iguales (13 horas cada uno), participando ambos tanto en las entrevistas y el análisis como en la definición de requisitos, la configuración de Git y las sesiones de ajuste y refinamiento del informe.
+Como equipo de dos personas (Nahuel Ximeno y Lautaro Moreno), mantuvimos una comunicación fluida a través de 6 reuniones de trabajo (presenciales y virtuales) y coordinación frecuente. Siempre trabajamos de forma conjunta y a la par, dedicando exactamente las mismas horas en cada etapa (15 horas en total cada uno), participando ambos tanto en las entrevistas y el análisis como en la definición de requisitos, el diseño del modelo de dominio UML, la configuración y sincronización de Git y las sesiones de ajuste y refinamiento del informe y anexo.
 
 ### Dificultades y Desafíos Encontrados
 
