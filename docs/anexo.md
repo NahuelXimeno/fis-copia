@@ -118,3 +118,145 @@ Carolina: Está bien como incentivo adicional. Si consigo un descuento, mejor. P
 Entrevistador: Si tuvieras que elegir una sola cosa que la aplicación debería resolver, ¿cuál sería?
 
 Carolina: Tener toda la información en un mismo lugar y poder encontrar algo que realmente me interese sin pasar tanto tiempo buscando.
+
+### Diagrama de Clases UML
+
+
+
+```mermaid
+classDiagram
+    direction TB
+
+    AppController --> CulturamaApp : coordina logica
+    AppController --> CarteleraView : actualiza
+    AppController --> DescubrimientoView : actualiza
+    AppController --> ModalPreferenciasView : abre y cierra
+    AppController --> FavoritosView : actualiza
+
+    CulturamaApp *-- CatalogoEventos : contiene
+    CulturamaApp *-- MotorRecomendacion : orquesta
+    CulturamaApp *-- ServicioGamificacion : delega
+    CulturamaApp --> Usuario : usuario actual
+    CulturamaApp --> AlmacenamientoLocal : persiste estado
+
+    CatalogoEventos "1" o-- "*" Evento : administra
+    MotorRecomendacion ..> Evento : analiza
+    MotorRecomendacion ..> Usuario : consulta perfil
+    MotorRecomendacion ..> PuenteCultural : aplica reglas
+
+    class AppController {
+        -CarteleraView carteleraView
+        -DescubrimientoView descubrimientoView
+        -ModalPreferenciasView modalView
+        -FavoritosView favoritosView
+        -CulturamaApp app
+        +iniciar() void
+        +onCambiarPestana(pestanaId) void
+        +onFiltrarEventos(filtros) void
+        +onGuardarIntereses(intereses) void
+        +onToggleFavorito(eventoId) void
+    }
+
+    class CarteleraView {
+        +renderizar(eventos) void
+        +obtenerValoresFiltro() CriterioFiltro
+        +limpiarFiltros() void
+    }
+
+    class DescubrimientoView {
+        +renderizarSeccionParaVos(eventos) void
+        +renderizarSeccionSimilares(puentes) void
+        +mostrarExplicacionPuente(texto) void
+    }
+
+    class ModalPreferenciasView {
+        +abrir() void
+        +cerrar() void
+        +renderizarCategorias(categorias, seleccionadas) void
+        +obtenerSeleccionadas() List
+    }
+
+    class FavoritosView {
+        +renderizarLista(eventosFavoritos) void
+        +actualizarBadgeContador(cantidad) void
+    }
+
+    class CulturamaApp {
+        -CatalogoEventos catalogo
+        -MotorRecomendacion motorRecomendacion
+        -ServicioGamificacion gamificacion
+        -Usuario usuarioActivo
+        -AlmacenamientoLocal storage
+        +obtenerCartelera(filtro) List
+        +obtenerSugerenciasParaVos() List
+        +obtenerSugerenciasSimilares() List
+        +alternarFavorito(eventoId) boolean
+        +guardarIntereses(intereses) void
+        +reclamarDesafio(desafioId) boolean
+    }
+
+    class CatalogoEventos {
+        -List eventos
+        +buscar(filtro) List
+        +obtenerPorId(id) Evento
+        +obtenerCategoriasDisponibles() List
+    }
+
+    class MotorRecomendacion {
+        -List puentesRegistrados
+        +recomendarPorAfinidad(usuario, cartelera) List
+        +recomendarFueraDeConfort(usuario, cartelera) List
+        +calcularPuente(catOrigen, catDestino) PuenteCultural
+    }
+
+    class ServicioGamificacion {
+        +obtenerDesafiosSemanales() List
+        +validarAsistencia(usuario, eventoId) boolean
+        +canjearBeneficio(usuario, beneficioId) boolean
+    }
+
+    class Evento {
+        -string id
+        -string titulo
+        -string descripcion
+        -Date fechaHora
+        -number precio
+        -boolean esEntradaLibre
+        -string sala
+        -string barrio
+        -string categoria
+        -string urlCompra
+        +esVigente() boolean
+        +esGratuito() boolean
+        +coincideConFiltro(filtro) boolean
+    }
+
+    class Usuario {
+        -string id
+        -string nombre
+        -List intereses
+        -List favoritosIds
+        -number saldoPuntos
+        +agregarFavorito(eventoId) void
+        +eliminarFavorito(eventoId) void
+        +actualizarIntereses(nuevosIntereses) void
+        +sumarPuntos(pts) void
+        +puedeCanjear(costoPuntos) boolean
+    }
+
+    class PuenteCultural {
+        -string categoriaOrigen
+        -string categoriaDestino
+        -string textoExplicacion
+        +aplicaPara(interesesUsuario) boolean
+        +generarMensajeConexion() string
+    }
+
+    class AlmacenamientoLocal {
+        +guardar(clave, data) void
+        +recuperar(clave) any
+        +eliminar(clave) void
+    }
+```
+
+
