@@ -359,7 +359,7 @@ flowchart LR
 
 **Identificador:** UC-01
 
-**Requerimientos asociados:** RF-01 (Exploración y Filtrado Multicriterio), RF-02 (Ficha Detallada del Evento), RF-03 (Taxonomía Cultural Estructurada), RNF-01 (Usabilidad), RNF-02 (Rendimiento)
+**Requerimientos asociados:** RF-01 (Exploración y Filtrado Multicriterio), RF-02 (Ficha Detallada del Evento), RF-03 (Clasificación Cultural Estructurada), RNF-01 (Usabilidad), RNF-02 (Rendimiento)
 
 **Nombre:** Explorar y Filtrar Cartelera de Eventos
 
@@ -395,7 +395,7 @@ flowchart LR
 
 **Identificador:** UC-02
 
-**Requerimientos asociados:** RF-03 (Taxonomía Cultural Estructurada), RF-04 (Recomendación por Afinidad Habitual), RF-05 (Descubrimiento Guiado Fuera de Zona de Confort), RF-10 (Perfil y Preferencias), RNF-01 (Usabilidad)
+**Requerimientos asociados:** RF-03 (Clasificación Cultural Estructurada), RF-04 (Recomendación por Afinidad Habitual), RF-05 (Descubrimiento Guiado Fuera de Zona de Confort), RF-10 (Perfil y Preferencias), RNF-01 (Usabilidad)
 
 **Nombre:** Descubrimiento Cultural Guiado ("Fuera de la Zona de Confort")
 
@@ -503,7 +503,7 @@ flowchart LR
 
 **Identificador:** UC-05
 
-**Requerimientos asociados:** RF-03 (Taxonomía Cultural Estructurada), RF-11 (Gestión y Carga de Eventos), RNF-03 (Actualización y Confiabilidad), RNF-06 (Seguridad y Validación)
+**Requerimientos asociados:** RF-03 (Clasificación Cultural Estructurada), RF-11 (Gestión y Carga de Eventos), RNF-03 (Actualización y Confiabilidad), RNF-06 (Seguridad y Validación)
 
 **Nombre:** Gestionar Eventos y Categorías
 
@@ -536,7 +536,7 @@ flowchart LR
 
 ## Modelo de Dominio
 
-Para estructurar la lógica del sistema y dar sustento a los casos de uso definidos, se diseñó el **Modelo de Clases UML de la Aplicación**, desacoplando estrictamente la interfaz de usuario (`src/interface`), el núcleo de dominio (`src/domain`) y la persistencia local en navegador (`localStorage`), en conformidad con el requisito **RNF-05**.
+Para estructurar la lógica del sistema y dar sustento a los casos de uso definidos, se diseñó el **Modelo de Clases UML de la Aplicación**, distribuyendo estrictamente la interfaz de usuario (`src/interface`), el núcleo de dominio (`src/domain`) y la persistencia local en navegador (`localStorage`), en conformidad con el requisito **RNF-05**.
 
 El detalle íntegro y su especificación exhaustiva se encuentra documentado en [anexo.md](anexo.md). A continuación se presenta el diagrama general de clases del software:
 
