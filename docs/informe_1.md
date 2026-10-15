@@ -800,11 +800,12 @@ Durante esta primera etapa del proyecto usamos herramientas de Inteligencia Arti
 
 - **Herramientas utilizadas:** Como modelo de lenguaje principal (LLM) utilizamos **Google Gemini**, complementado con herramientas de asistencia visual para el armado del prototipo.
 - **En qué la aplicamos:**
+  - **Validación de requisitos y casos de uso:** Utilizamos la herramienta para validar y verificar que la formulación de los requisitos funcionales (RF) y no funcionales (RNF), así como la especificación de los casos de uso, fueran correctos, consistentes, completos y sin ambigüedades.
+  - **Generación del diagrama de clases y diagramación:** Nos apoyamos en la IA para ayudarnos a estructurar y generar el diagrama de clases UML de la aplicación (modelo de dominio) y los diagramas de casos de uso en sintaxis Mermaid, facilitando una clara separación entre las capas de interfaz, dominio y almacenamiento.
   - **Diseño y prototipo de UI:** Nos apoyamos en Gemini para maquetar y estructurar el prototipo interactivo de CULTURAMA, evaluando combinaciones de colores, tipografías y ordenando los componentes principales (home, recomendaciones, cartelera completa, preferencias y favoritos).
   - **Redacción y estructura del informe:** Usamos la herramienta para revisar la claridad de las explicaciones, pulir la redacción y organizar las secciones del documento.
-  - **Diagramación:** Apoyo en la generación de código Mermaid para los diagramas de casos de uso y modelo de dominio.
 - **Buenas prácticas y control humano:**
-  - **Revisión y validación propia:** Ningún texto, diagrama o componente visual se incorporó sin que Nahuel Ximeno y Lautaro Moreno lo revisáramos, adaptáramos y validáramos críticamente.
+  - **Revisión y validación propia:** Ningún texto, requerimiento, diagrama o componente visual se incorporó sin que Nahuel Ximeno y Lautaro Moreno lo revisáramos, adaptáramos y validáramos críticamente con criterio propio.
   - **Autoría del proyecto:** La idea de CULTURAMA, la realización presencial de las entrevistas y las decisiones sobre qué requisitos incluir son de total autoría del equipo.
 
 ---
