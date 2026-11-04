@@ -1,15 +1,370 @@
-.navbar {
-  margin-bottom: 40px;
-  background-color: rgba(237, 237, 237, 0.95);
+:root {
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Paleta oficial Culturama */
+  --culturama-bg: #F7F5EE;         /* Fondo crema oficial */
+  --culturama-dark: #1A1A1A;       /* Negro carbón oficial */
+  --culturama-teal: #66C5BA;       /* Turquesa / Menta */
+  --culturama-purple: #9B82F3;     /* Lila / Violeta suave */
+  --culturama-coral: #F8A775;      /* Naranja / Melocotón */
+  --culturama-card-bg: #FFFFFF;
+  --culturama-border: #E8E5DC;
 }
 
-#add-countries-image {
+body {
+  font-family: var(--font-main);
+  background-color: var(--culturama-bg);
+  color: var(--culturama-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar-culturama {
+  background-color: rgba(247, 245, 238, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--culturama-border);
+}
+
+.brand-logo-isotipo-hd {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transition: transform 0.2s ease;
+}
+
+.brand-logo-isotipo-hd:hover {
+  transform: scale(1.06);
+}
+
+.brand-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-weight: 800;
+  font-size: 1.45rem;
+  line-height: 1;
+  letter-spacing: -0.6px;
+  color: var(--culturama-dark);
+}
+
+.brand-tagline {
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #717171;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.badge-montevideo {
+  background-color: #EAE6D9;
+  color: #4A4A4A;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+}
+
+/* BOTONES Y ACENTOS CULTURAMA */
+.btn-culturama-dark {
+  background-color: var(--culturama-dark);
+  color: #FFFFFF;
+  border: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-culturama-dark:hover {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+.btn-culturama-surprise {
+  background-color: #FFFFFF;
+  border: 1px solid var(--culturama-border);
+  color: var(--culturama-dark);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-culturama-surprise:hover {
+  border-color: var(--culturama-teal);
+  background-color: #FAF9F5;
+  color: #0E7490;
+}
+
+.bg-culturama-teal {
+  background-color: var(--culturama-teal) !important;
+  color: #0B4F47 !important;
+}
+
+.bg-culturama-purple {
+  background-color: var(--culturama-purple) !important;
+  color: #3B2A82 !important;
+}
+
+.bg-culturama-coral {
+  background-color: var(--culturama-coral) !important;
+  color: #7C2D12 !important;
+}
+
+/* HERO SECTION */
+.hero-section {
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.hero-pill {
+  background-color: #ECE8DD;
+  color: var(--culturama-dark);
+  font-size: 0.78rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: var(--culturama-dark);
+}
+
+.hero-subtitle {
+  max-width: 680px;
+  color: #555555;
+  font-size: 1.15rem;
+}
+
+/* BUSCADOR Y FILTROS */
+.search-box {
+  max-width: 900px;
+  border-radius: 1.25rem;
+  background: var(--culturama-card-bg);
+  border: 1px solid var(--culturama-border);
+}
+
+.search-box .form-select {
+  border-color: #E5E7EB;
+  font-size: 0.95rem;
+}
+
+.search-box .form-select:focus {
+  border-color: var(--culturama-teal);
+  box-shadow: 0 0 0 3px rgba(102, 197, 186, 0.25);
+}
+
+/* BANNER PUENTE CULTURAL */
+.card-puente-cultural {
+  background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+  border-radius: 1.5rem;
+  border: none;
+}
+
+.puente-node-teal {
+  color: var(--culturama-teal);
+}
+.puente-node-coral {
+  color: var(--culturama-coral);
+}
+.puente-node-purple {
+  color: var(--culturama-purple);
+}
+
+/* CARDS DE EVENTOS */
+.card-event {
+  border-radius: 1.25rem;
+  background: var(--culturama-card-bg);
+  border: 1px solid var(--culturama-border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.card-event:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(26, 26, 26, 0.08) !important;
+}
+
+.card-event-img {
+  height: 190px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card-event-img-fallback {
+  height: 190px;
+  background-color: #EFECE3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  color: #A39E93;
+}
+
+.badge-tag-category {
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* CHIPS ONBOARDING */
+.interest-chip {
+  cursor: pointer;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  border: 1px solid var(--culturama-border);
+  background: #FFFFFF;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--culturama-dark);
+  transition: all 0.2s ease;
+}
+
+.interest-chip:hover {
+  border-color: var(--culturama-teal);
+  background-color: #F0FAF8;
+}
+
+.interest-chip.active {
+  background-color: var(--culturama-dark);
+  color: #FFFFFF;
+  border-color: var(--culturama-dark);
+}
+
+/* DADO 3D FÍSICO REALISTA */
+.dice-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 0 1.5rem 0;
+  perspective: 1000px;
+}
+
+.dice-scene {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dice-cube {
   width: 100%;
   height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.2, 0.85, 0.3, 1);
+  will-change: transform;
 }
 
-.error-container {
+.dice-stage:hover .dice-cube:not(.is-rolling) {
+  transform: rotateX(25deg) rotateY(25deg);
+}
+
+/* Sombra suave proyectada en la base */
+.dice-shadow-floor {
+  width: 90px;
+  height: 18px;
+  background: radial-gradient(ellipse at center, rgba(26, 26, 26, 0.3) 0%, rgba(26, 26, 26, 0) 70%);
+  margin: 22px auto 0 auto;
+  border-radius: 50%;
+  transition: all 0.4s ease;
+}
+
+/* Caras del cubo: esquinas con radio armónico (12px) y profundidad exacta */
+.dice-face {
   position: absolute;
-  bottom: 0;
-  right: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #D6D2C4;
+  border-radius: 12px;
+  display: grid;
+  padding: 14px;
+  box-sizing: border-box;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  backface-visibility: hidden;
+}
+
+/* 100px / 2 = 50px de profundidad exacta */
+.dice-face.face-1 { transform: rotateY(0deg) translateZ(50px); }
+.dice-face.face-2 { transform: rotateY(90deg) translateZ(50px); }
+.dice-face.face-3 { transform: rotateY(180deg) translateZ(50px); }
+.dice-face.face-4 { transform: rotateY(-90deg) translateZ(50px); }
+.dice-face.face-5 { transform: rotateX(90deg) translateZ(50px); }
+.dice-face.face-6 { transform: rotateX(-90deg) translateZ(50px); }
+
+/* Puntos grabados / hendiduras del dado */
+.dice-pip {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--culturama-dark);
+  align-self: center;
+  justify-self: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+.pip-teal { 
+  background-color: var(--culturama-teal) !important;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.25) !important;
+}
+.pip-coral { 
+  background-color: var(--culturama-coral) !important;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.25) !important;
+}
+.pip-purple { 
+  background-color: var(--culturama-purple) !important;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Grilla clásica de los dados */
+.face-1 { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.face-2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.face-2 .dice-pip:nth-child(2) { grid-column: 2; grid-row: 2; }
+.face-3 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
+.face-3 .dice-pip:nth-child(1) { grid-column: 1; grid-row: 1; }
+.face-3 .dice-pip:nth-child(2) { grid-column: 2; grid-row: 2; }
+.face-3 .dice-pip:nth-child(3) { grid-column: 3; grid-row: 3; }
+.face-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.face-5 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
+.face-5 .dice-pip:nth-child(1) { grid-column: 1; grid-row: 1; }
+.face-5 .dice-pip:nth-child(2) { grid-column: 3; grid-row: 1; }
+.face-5 .dice-pip:nth-child(3) { grid-column: 2; grid-row: 2; }
+.face-5 .dice-pip:nth-child(4) { grid-column: 1; grid-row: 3; }
+.face-5 .dice-pip:nth-child(5) { grid-column: 3; grid-row: 3; }
+.face-6 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
+
+/* Card revelada con efecto pop */
+.dice-result-card {
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* FOOTER */
+.footer-culturama {
+  background-color: var(--culturama-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
