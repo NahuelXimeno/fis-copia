@@ -3,7 +3,7 @@ import { EventoList } from "../domain/eventolist.ts";
 import { Usuario } from "../domain/usuario.ts";
 
 // --- ESTADO EN MEMORIA (Sin persistencia externa, conforme a restricciones) ---
-const usuarioComun = new Usuario("u-sofia", "Sofía", false);
+const usuarioComun = new Usuario("u-lautaro", "Lautaro", false);
 usuarioComun.intereses = ["Música", "Teatro"];
 
 const usuarioAdmin = new Usuario("u-admin", "Nahuel (Admin)", true);
@@ -211,6 +211,10 @@ function lanzarDadoAnimado() {
 const filterCategoria = document.getElementById("filter-categoria") as HTMLSelectElement;
 const filterBarrio = document.getElementById("filter-barrio") as HTMLSelectElement;
 const filterPrecio = document.getElementById("filter-precio") as HTMLSelectElement;
+const filterBusqueda = document.getElementById("filter-busqueda") as HTMLInputElement;
+const btnClearSearch = document.getElementById("btn-clear-search") as HTMLButtonElement;
+const categoryChipsBar = document.getElementById("categoryChipsBar") as HTMLDivElement;
+const activeFilterTags = document.getElementById("activeFilterTags") as HTMLDivElement;
 const btnResetFilters = document.getElementById("btn-reset-filters") as HTMLButtonElement;
 const btnClearEmpty = document.getElementById("btn-clear-empty") as HTMLButtonElement;
 const mensajeSinResultados = document.getElementById("mensaje-sin-resultados") as HTMLDivElement;
@@ -226,7 +230,7 @@ const tabCartelera = document.getElementById("tab-cartelera") as HTMLAnchorEleme
 const tabFavoritos = document.getElementById("tab-favoritos") as HTMLAnchorElement;
 
 const currentUserLabel = document.getElementById("current-user-label") as HTMLSpanElement;
-const btnPerfilSofia = document.getElementById("btn-perfil-sofia") as HTMLButtonElement;
+const btnPerfilUsuario = document.getElementById("btn-perfil-usuario") as HTMLButtonElement;
 const btnPerfilAdmin = document.getElementById("btn-perfil-admin") as HTMLButtonElement;
 const navItemAdmin = document.getElementById("nav-item-admin") as HTMLLIElement;
 const seccionAdmin = document.getElementById("seccion-admin") as HTMLElement;
@@ -270,6 +274,35 @@ function configurarEventosUI() {
   filterBarrio?.addEventListener("change", () => aplicarFiltrosYRenderizar());
   filterPrecio?.addEventListener("change", () => aplicarFiltrosYRenderizar());
 
+  // Input de búsqueda en tiempo real
+  filterBusqueda?.addEventListener("input", () => {
+    if (filterBusqueda.value.trim().length > 0) {
+      btnClearSearch?.classList.remove("d-none");
+    } else {
+      btnClearSearch?.classList.add("d-none");
+    }
+    aplicarFiltrosYRenderizar();
+  });
+
+  btnClearSearch?.addEventListener("click", () => {
+    filterBusqueda.value = "";
+    btnClearSearch.classList.add("d-none");
+    aplicarFiltrosYRenderizar();
+    filterBusqueda.focus();
+  });
+
+  // Selector visual de Categorías con Chips (21st.dev)
+  const categoryChips = categoryChipsBar?.querySelectorAll(".category-chip");
+  categoryChips?.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      categoryChips.forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      const selectedCat = chip.getAttribute("data-category") || "todas";
+      filterCategoria.value = selectedCat;
+      aplicarFiltrosYRenderizar();
+    });
+  });
+
   btnResetFilters?.addEventListener("click", resetearFiltros);
   btnClearEmpty?.addEventListener("click", resetearFiltros);
 
@@ -302,11 +335,11 @@ function configurarEventosUI() {
   });
 
   // Cambio de usuario / rol
-  btnPerfilSofia?.addEventListener("click", () => {
+  btnPerfilUsuario?.addEventListener("click", () => {
     usuarioActivo = usuarioComun;
     actualizarVistaUsuario();
     aplicarFiltrosYRenderizar();
-    mostrarAlerta("Sesión cambiada a perfil: Sofía (Usuario común)", "info");
+    mostrarAlerta("Sesión cambiada a perfil: Lautaro (Usuario común)", "info");
   });
 
   btnPerfilAdmin?.addEventListener("click", () => {
@@ -363,6 +396,29 @@ function configurarEventosUI() {
     chips.forEach((c) => c.classList.add("active"));
     usuarioActivo.intereses = ["Música", "Teatro", "Visuales", "Cine", "Literatura", "Comunidad"];
   });
+
+  // Vincular eventos del Floating Dock (21st.dev)
+  const dockCartelera = document.getElementById("dock-cartelera");
+  const dockFavoritos = document.getElementById("dock-favoritos");
+  const dockDice = document.getElementById("dock-dice");
+
+  dockCartelera?.addEventListener("click", (e) => {
+    e.preventDefault();
+    tabCartelera.click();
+    dockCartelera.classList.add("dock-active");
+    dockFavoritos?.classList.remove("dock-active");
+  });
+
+  dockFavoritos?.addEventListener("click", (e) => {
+    e.preventDefault();
+    tabFavoritos.click();
+    dockFavoritos.classList.add("dock-active");
+    dockCartelera?.classList.remove("dock-active");
+  });
+
+  dockDice?.addEventListener("click", () => {
+    btnSurprise.click();
+  });
 }
 
 function actualizarVistaUsuario() {
@@ -376,11 +432,11 @@ function actualizarVistaUsuario() {
     navItemAdmin.classList.remove("d-none");
     seccionAdmin.classList.remove("d-none");
     btnPerfilAdmin.classList.add("active");
-    btnPerfilSofia.classList.remove("active");
+    btnPerfilUsuario.classList.remove("active");
   } else {
     navItemAdmin.classList.add("d-none");
     seccionAdmin.classList.add("d-none");
-    btnPerfilSofia.classList.add("active");
+    btnPerfilUsuario.classList.add("active");
     btnPerfilAdmin.classList.remove("active");
   }
 
@@ -395,12 +451,33 @@ function actualizarBadges() {
   countFavoritos.textContent = String(totalFavs);
   badgeInteresesCount.textContent = String(usuarioActivo.intereses.length);
   countTodos.textContent = String(listaEventos.eventos.length);
+
+  // Actualizar Floating Dock (21st.dev)
+  const dockFavBadge = document.getElementById("dock-fav-count");
+  if (dockFavBadge) {
+    dockFavBadge.textContent = String(totalFavs);
+  }
 }
 
 function resetearFiltros() {
   filterCategoria.value = "todas";
   filterBarrio.value = "todos";
   filterPrecio.value = "todos";
+  if (filterBusqueda) {
+    filterBusqueda.value = "";
+  }
+  btnClearSearch?.classList.add("d-none");
+
+  // Resetear visualmente chips de categoría
+  const categoryChips = categoryChipsBar?.querySelectorAll(".category-chip");
+  categoryChips?.forEach((c) => {
+    if (c.getAttribute("data-category") === "todas") {
+      c.classList.add("active");
+    } else {
+      c.classList.remove("active");
+    }
+  });
+
   aplicarFiltrosYRenderizar();
 }
 
@@ -419,7 +496,99 @@ function obtenerCriterioFiltro(): CriterioFiltro {
     criterio.precioMax = Number(filterPrecio.value);
   }
 
+  if (filterBusqueda && filterBusqueda.value.trim().length > 0) {
+    criterio.busquedaTexto = filterBusqueda.value.trim();
+  }
+
   return criterio;
+}
+
+function actualizarResumenFiltrosActivos(filtro: CriterioFiltro, cantidadResultados: number) {
+  if (!activeFilterTags) return;
+  activeFilterTags.innerHTML = "";
+
+  const tokens: { label: string; onRemove?: () => void }[] = [];
+
+  if (filtro.busquedaTexto) {
+    tokens.push({
+      label: `Texto: "${filtro.busquedaTexto}"`,
+      onRemove: () => {
+        filterBusqueda.value = "";
+        btnClearSearch?.classList.add("d-none");
+        aplicarFiltrosYRenderizar();
+      },
+    });
+  }
+
+  if (filtro.categoria && filtro.categoria !== "todas") {
+    tokens.push({
+      label: `Categoría: ${filtro.categoria}`,
+      onRemove: () => {
+        filterCategoria.value = "todas";
+        const categoryChips = categoryChipsBar?.querySelectorAll(".category-chip");
+        categoryChips?.forEach((c) => {
+          c.classList.toggle("active", c.getAttribute("data-category") === "todas");
+        });
+        aplicarFiltrosYRenderizar();
+      },
+    });
+  }
+
+  if (filtro.barrio && filtro.barrio !== "todos") {
+    tokens.push({
+      label: `Barrio: ${filtro.barrio}`,
+      onRemove: () => {
+        filterBarrio.value = "todos";
+        aplicarFiltrosYRenderizar();
+      },
+    });
+  }
+
+  if (filtro.soloGratis) {
+    tokens.push({
+      label: "Precio: Solo Gratuitos",
+      onRemove: () => {
+        filterPrecio.value = "todos";
+        aplicarFiltrosYRenderizar();
+      },
+    });
+  } else if (filtro.precioMax) {
+    tokens.push({
+      label: `Precio: Hasta $${filtro.precioMax}`,
+      onRemove: () => {
+        filterPrecio.value = "todos";
+        aplicarFiltrosYRenderizar();
+      },
+    });
+  }
+
+  if (tokens.length === 0) {
+    const span = document.createElement("span");
+    span.className = "filter-pill-token";
+    span.textContent = `Mostrando todos los eventos (${cantidadResultados})`;
+    activeFilterTags.appendChild(span);
+  } else {
+    tokens.forEach((t) => {
+      const pill = document.createElement("span");
+      pill.className = "filter-pill-token";
+      pill.innerHTML = `<span>${t.label}</span>`;
+      if (t.onRemove) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn-remove-token ms-1";
+        btn.innerHTML = '<i class="bi bi-x"></i>';
+        btn.addEventListener("click", t.onRemove);
+        pill.appendChild(btn);
+      }
+      activeFilterTags.appendChild(pill);
+    });
+
+    // Contador de resultados filtrados
+    const countPill = document.createElement("span");
+    countPill.className = "filter-pill-token bg-dark text-white";
+    countPill.textContent = `${cantidadResultados} encontrado(s)`;
+    activeFilterTags.appendChild(countPill);
+  }
 }
 
 function aplicarFiltrosYRenderizar() {
@@ -432,6 +601,7 @@ function aplicarFiltrosYRenderizar() {
 
   renderizarCards(eventos);
   actualizarBadges();
+  actualizarResumenFiltrosActivos(filtro, eventos.length);
 }
 
 function renderizarCards(eventos: Evento[]) {
@@ -458,12 +628,23 @@ function renderizarCards(eventos: Evento[]) {
     }
 
     col.innerHTML = `
-      <div class="card card-event h-100 shadow-sm border-0 position-relative">
-        ${
-          ev.imagenUrl
-            ? `<img src="${ev.imagenUrl}" class="card-event-img" alt="${ev.titulo}" loading="lazy" />`
-            : `<div class="card-event-img-fallback"><i class="bi bi-ticket-perforated"></i></div>`
-        }
+      <div class="card card-event h-100 shadow-sm border-0 position-relative" data-id="${ev.id}" role="button" tabindex="0">
+        <div class="card-event-media position-relative">
+          ${ev.imagenUrl
+        ? `<img src="${ev.imagenUrl}" class="card-event-img" alt="${ev.titulo}" loading="lazy" />`
+        : `<div class="card-event-img-fallback"><i class="bi bi-ticket-perforated"></i></div>`
+      }
+          <!-- Botón Favorito Flotante sobre la Imagen (Patrón Moderno) -->
+          <button
+            class="btn-floating-fav btn-toggle-fav ${esFav ? "active" : ""}"
+            data-id="${ev.id}"
+            title="${esFav ? "Quitar de favoritos" : "Guardar en favoritos"}"
+            aria-label="${esFav ? "Quitar de favoritos" : "Guardar en favoritos"}"
+          >
+            <i class="bi ${esFav ? "bi-heart-fill text-danger" : "bi-heart"}"></i>
+          </button>
+        </div>
+
         <div class="card-body d-flex flex-column p-4">
           <div class="d-flex justify-content-between align-items-start mb-2">
             <span class="badge ${badgeClass} badge-tag-category">
@@ -483,26 +664,58 @@ function renderizarCards(eventos: Evento[]) {
           </div>
 
           <div class="d-flex gap-2 pt-2 border-top">
-            <button class="btn btn-sm btn-outline-danger flex-grow-1 btn-toggle-fav" data-id="${ev.id}">
-              <i class="bi ${esFav ? "bi-heart-fill text-danger" : "bi-heart"} me-1"></i>
-              ${esFav ? "Guardado" : "Favorito"}
+            <button class="btn btn-sm btn-outline-dark rounded-pill px-3 btn-abrir-mapa d-inline-flex align-items-center justify-content-center gap-1" data-id="${ev.id}">
+              <i class="bi bi-pin-map-fill text-danger"></i>
+              <span>Ubicación</span>
             </button>
-            <button class="btn btn-sm btn-culturama-surprise btn-ver-detalle" data-id="${ev.id}">
-              <i class="bi bi-info-circle me-1"></i> Ficha
+            <button class="btn btn-sm btn-culturama-surprise flex-grow-1 rounded-pill btn-ver-detalle" data-id="${ev.id}">
+              <i class="bi bi-info-circle me-1"></i> Más información
             </button>
-            ${
-              usuarioActivo.esAdmin
-                ? `<button class="btn btn-sm btn-outline-secondary btn-eliminar-evento text-danger" data-id="${ev.id}" title="Eliminar evento (Admin)">
+            ${usuarioActivo.esAdmin
+        ? `<button class="btn btn-sm btn-outline-secondary btn-eliminar-evento text-danger rounded-pill px-2" data-id="${ev.id}" title="Eliminar evento (Admin)">
                     <i class="bi bi-trash"></i>
                    </button>`
-                : ""
-            }
+        : ""
+      }
           </div>
         </div>
       </div>
     `;
 
     contenedorCards.appendChild(col);
+
+    // Micro-interacción Spotlight 21st.dev y Clic en Card para ver más información
+    const cardEl = col.querySelector(".card-event") as HTMLElement;
+    if (cardEl) {
+      cardEl.addEventListener("mousemove", (e: MouseEvent) => {
+        const rect = cardEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        cardEl.style.setProperty("--mouse-x", `${x}px`);
+        cardEl.style.setProperty("--mouse-y", `${y}px`);
+      });
+
+      // Al hacer clic en cualquier parte de la tarjeta (excepto en botones de acción), abrir más información
+      cardEl.addEventListener("click", (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (target.closest("button") || target.closest("a")) {
+          return;
+        }
+        mostrarModalDetalle(ev.id);
+      });
+
+      // Soporte de accesibilidad con teclado (Enter o Espacio)
+      cardEl.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          const target = e.target as HTMLElement;
+          if (target.closest("button") || target.closest("a")) {
+            return;
+          }
+          e.preventDefault();
+          mostrarModalDetalle(ev.id);
+        }
+      });
+    }
   });
 
   // Vincular eventos a botones de las cards
@@ -522,6 +735,13 @@ function renderizarCards(eventos: Evento[]) {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-id")!;
       mostrarModalDetalle(id);
+    });
+  });
+
+  contenedorCards.querySelectorAll(".btn-abrir-mapa").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id")!;
+      abrirModalMapaConAnimacionEpica(id);
     });
   });
 
@@ -557,9 +777,12 @@ function mostrarModalDetalle(id: string) {
       <li class="list-group-item px-0"><strong>Fecha y Hora:</strong> ${ev.fecha} a las ${ev.horario} hs</li>
       <li class="list-group-item px-0"><strong>Costo:</strong> ${ev.esGratuito ? "Entrada Libre y Gratuita" : `$ ${ev.precio} UYU`}</li>
     </ul>
-    <div class="d-grid">
-      <a href="https://maps.google.com/?q=${encodeURIComponent(ev.lugar + ' ' + ev.barrio + ' Montevideo')}" target="_blank" class="btn btn-culturama-dark btn-sm">
-        <i class="bi bi-map me-1"></i> Ver ubicación en mapa
+    <div class="d-grid gap-2">
+      <button class="btn btn-culturama-teal btn-sm text-dark fw-bold btn-abrir-mapa-modal" data-id="${ev.id}">
+        <i class="bi bi-geo-alt-fill text-danger me-1"></i> Abrir mapa interactivo 3D
+      </button>
+      <a href="https://maps.google.com/?q=${encodeURIComponent(ev.lugar + ' ' + ev.barrio + ' Montevideo')}" target="_blank" class="btn btn-outline-dark btn-sm">
+        <i class="bi bi-box-arrow-up-right me-1"></i> Abrir en Google Maps externo
       </a>
     </div>
   `;
@@ -567,6 +790,71 @@ function mostrarModalDetalle(id: string) {
   // @ts-expect-error Bootstrap Modal global
   const modal = new window.bootstrap.Modal(document.getElementById("modalDetalleEvento"));
   modal.show();
+
+  const btnMapaModal = modalBody.querySelector(".btn-abrir-mapa-modal");
+  if (btnMapaModal) {
+    btnMapaModal.addEventListener("click", () => {
+      modal.hide();
+      abrirModalMapaConAnimacionEpica(id);
+    });
+  }
+}
+
+// Coordenadas emblemáticas de Montevideo por barrio / lugar
+const COORDENADAS_MONTEVIDEO: Record<string, { lat: number; lng: number }> = {
+  "Ciudad Vieja": { lat: -34.9065, lng: -56.2053 },
+  "Centro": { lat: -34.9056, lng: -56.1912 },
+  "Parque Rodó": { lat: -34.9157, lng: -56.1663 },
+  "Pocitos": { lat: -34.9189, lng: -56.1492 },
+  "Cordón": { lat: -34.9031, lng: -56.1772 },
+  "Prado": { lat: -34.8601, lng: -56.2045 },
+  "Punta Carretas": { lat: -34.9256, lng: -56.1582 },
+  "Palermo": { lat: -34.9112, lng: -56.1788 },
+  "Barrio Sur": { lat: -34.9123, lng: -56.1932 },
+  "default": { lat: -34.9011, lng: -56.1645 },
+};
+
+function abrirModalMapaConAnimacionEpica(id: string) {
+  const ev = listaEventos.obtenerPorId(id);
+  if (!ev) return;
+
+  const modalEl = document.getElementById("modalMapaEvento")!;
+  const subtituloEl = document.getElementById("modalMapaSubtitulo")!;
+  const lugarEl = document.getElementById("modalMapaLugar")!;
+  const barrioEl = document.getElementById("modalMapaBarrio")!;
+  const gmapsLink = document.getElementById("modalMapaGmapsLink") as HTMLAnchorElement;
+  const coordsEl = document.getElementById("hudCoords")!;
+  const viewportEl = document.getElementById("mapViewport")!;
+  const iframeEl = document.getElementById("googleMapsIframe") as HTMLIFrameElement;
+
+  // Asignar datos del evento
+  subtituloEl.textContent = `${ev.titulo} — ${ev.categoria}`;
+  lugarEl.textContent = ev.lugar;
+  barrioEl.innerHTML = `<i class="bi bi-pin-map me-1 text-danger"></i> ${ev.barrio}, Montevideo`;
+
+  const queryDireccion = `${ev.lugar}, ${ev.barrio}, Montevideo, Uruguay`;
+  gmapsLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(queryDireccion)}`;
+
+  // Coordenadas destino
+  const coords = COORDENADAS_MONTEVIDEO[ev.barrio] || COORDENADAS_MONTEVIDEO["default"];
+  coordsEl.textContent = `${coords.lat.toFixed(4)}° S, ${coords.lng.toFixed(4)}° W`;
+
+  // Cargar Google Maps oficial incrustado
+  if (iframeEl) {
+    iframeEl.src = `https://maps.google.com/maps?q=${encodeURIComponent(queryDireccion)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  }
+
+  // Resetear estados previos de animación
+  viewportEl.classList.remove("map-viewport-revealed");
+
+  // @ts-expect-error Bootstrap Modal global
+  const modal = new window.bootstrap.Modal(modalEl);
+  modal.show();
+
+  // Revelar mapa con transición suave
+  setTimeout(() => {
+    viewportEl.classList.add("map-viewport-revealed");
+  }, 120);
 }
 
 function crearEventoAdmin() {

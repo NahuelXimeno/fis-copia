@@ -1,547 +1,684 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CULTURAMA — Descubrí · Viví · Sumá</title>
-    <link rel="icon" href="src/interface/img/logo.png" type="image/png" />
-    <!-- Bootstrap 5 CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link href="src/interface/style.css" rel="stylesheet" />
-  </head>
 
-  <body>
-    <!-- 1. NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-culturama sticky-top">
-      <div class="container">
-        <!-- Logo Oficial Culturama con Isotipo HD -->
-        <a class="navbar-brand d-flex align-items-center gap-2 py-0" href="#">
-          <img
-            src="src/interface/img/logo-hd.jpg"
-            alt="Isotipo Culturama"
-            class="brand-logo-isotipo-hd"
-          />
-          <div class="brand-text-container ms-1">
-            <span class="brand-title">culturama</span>
-            <span class="brand-tagline">DESCUBRÍ · VIVÍ · SUMÁ</span>
-          </div>
-          <span class="badge badge-montevideo ms-1 d-none d-sm-inline-block">Montevideo</span>
-        </a>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CULTURAMA</title>
+  <link rel="icon" href="src/interface/img/logo.png" type="image/png" />
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Leaflet.js CSS para Mapa Interactivo Cool/Dark Matter -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link href="src/interface/style.css" rel="stylesheet" />
+</head>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarMain"
-          aria-controls="navbarMain"
-          aria-expanded="false"
-          aria-label="Abrir navegación"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<body>
+  <!-- 1. NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-culturama sticky-top">
+    <div class="container">
+      <!-- Logo Oficial Culturama con Isotipo HD -->
+      <a class="navbar-brand d-flex align-items-center gap-2 py-0" href="#">
+        <img src="src/interface/img/logo-hd.jpg" alt="Isotipo Culturama" class="brand-logo-isotipo-hd" />
+        <div class="brand-text-container ms-1">
+          <span class="brand-title">culturama</span>
+          <span class="brand-tagline">DESCUBRÍ · VIVÍ · SUMÁ</span>
+        </div>
+        <span class="badge badge-montevideo ms-1 d-none d-sm-inline-block">Montevideo</span>
+      </a>
 
-        <div class="collapse navbar-collapse" id="navbarMain">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-            <li class="nav-item">
-              <a class="nav-link active fw-semibold" id="tab-cartelera" href="#seccion-cartelera">
-                <i class="bi bi-grid-fill me-1"></i> Cartelera
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold" id="tab-favoritos" href="#seccion-cartelera">
-                <i class="bi bi-heart-fill me-1 text-danger"></i> Favoritos
-                <span class="badge rounded-pill bg-danger ms-1" id="badge-fav-count">0</span>
-              </a>
-            </li>
-            <li class="nav-item d-none" id="nav-item-admin">
-              <a class="nav-link text-warning fw-bold" href="#seccion-admin">
-                <i class="bi bi-shield-lock-fill me-1"></i> Panel Admin
-              </a>
-            </li>
-          </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+        aria-controls="navbarMain" aria-expanded="false" aria-label="Abrir navegación">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <div class="d-flex align-items-center gap-2 flex-wrap">
-            <!-- Botón Sorpresa "¿Qué hacer hoy?" -->
-            <button class="btn btn-culturama-surprise btn-sm px-3" id="btn-surprise">
-              <i class="bi bi-stars text-success me-1"></i> ¿Qué hacer hoy?
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item">
+            <a class="nav-link active fw-semibold" id="tab-cartelera" href="#seccion-cartelera">
+              <i class="bi bi-grid-fill me-1"></i> Cartelera
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" id="tab-favoritos" href="#seccion-cartelera">
+              <i class="bi bi-heart-fill me-1 text-danger"></i> Favoritos
+              <span class="badge rounded-pill bg-danger ms-1" id="badge-fav-count">0</span>
+            </a>
+          </li>
+          <li class="nav-item d-none" id="nav-item-admin">
+            <a class="nav-link text-warning fw-bold" href="#seccion-admin">
+              <i class="bi bi-shield-lock-fill me-1"></i> Panel Admin
+            </a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <!-- Botón Sorpresa "¿Qué hacer hoy?" -->
+          <button class="btn btn-culturama-surprise btn-sm px-3" id="btn-surprise">
+            <i class="bi bi-stars text-success me-1"></i> ¿Qué hacer hoy?
+          </button>
+
+          <!-- Botón Onboarding / Intereses -->
+          <button class="btn btn-culturama-dark btn-sm d-flex align-items-center gap-2 px-3" data-bs-toggle="modal"
+            data-bs-target="#modalOnboarding">
+            <i class="bi bi-compass text-info"></i>
+            <span>Mis Intereses</span>
+            <span class="badge bg-culturama-teal rounded-pill" id="badge-intereses-count">0</span>
+          </button>
+
+          <!-- Selector de Usuario / Rol -->
+          <div class="dropdown">
+            <button class="btn btn-white border btn-sm dropdown-toggle d-flex align-items-center gap-1 shadow-sm"
+              type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle text-secondary"></i>
+              <span id="current-user-label">Lautaro (Usuario)</span>
             </button>
-
-            <!-- Botón Onboarding / Intereses -->
-            <button
-              class="btn btn-culturama-dark btn-sm d-flex align-items-center gap-2 px-3"
-              data-bs-toggle="modal"
-              data-bs-target="#modalOnboarding"
-            >
-              <i class="bi bi-compass text-info"></i>
-              <span>Mis Intereses</span>
-              <span class="badge bg-culturama-teal rounded-pill" id="badge-intereses-count">0</span>
-            </button>
-
-            <!-- Selector de Usuario / Rol -->
-            <div class="dropdown">
-              <button
-                class="btn btn-white border btn-sm dropdown-toggle d-flex align-items-center gap-1 shadow-sm"
-                type="button"
-                id="dropdownUser"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i class="bi bi-person-circle text-secondary"></i>
-                <span id="current-user-label">Sofía (Usuario)</span>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="dropdownUser">
-                <li><h6 class="dropdown-header">Cambiar perfil activo</h6></li>
-                <li>
-                  <button class="dropdown-item active" type="button" id="btn-perfil-sofia">
-                    <i class="bi bi-person me-2"></i> Sofía (Usuario común)
-                  </button>
-                </li>
-                <li>
-                  <button class="dropdown-item" type="button" id="btn-perfil-admin">
-                    <i class="bi bi-shield-shaded me-2 text-warning"></i> Nahuel (Administrador)
-                  </button>
-                </li>
-              </ul>
-            </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="dropdownUser">
+              <li>
+                <h6 class="dropdown-header">Cambiar perfil activo</h6>
+              </li>
+              <li>
+                <button class="dropdown-item active" type="button" id="btn-perfil-usuario">
+                  <i class="bi bi-person me-2"></i> Lautaro (Usuario común)
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button" id="btn-perfil-admin">
+                  <i class="bi bi-shield-shaded me-2 text-warning"></i> Nahuel (Administrador)
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <!-- ALERTA GLOBAL -->
-    <div class="container mt-3" id="alert-container"></div>
+  <!-- ALERTA GLOBAL -->
+  <div class="container mt-3" id="alert-container"></div>
 
-    <!-- 2. HERO SECTION -->
-    <header class="hero-section">
-      <div class="container text-center py-4">
-        <span class="badge hero-pill px-3 py-2 rounded-pill fw-bold mb-3">
-          DESCUBRÍ · VIVÍ · SUMÁ CULTURA EN MONTEVIDEO
-        </span>
-        <h1 class="hero-title mb-3">
-          Tu cartelera cultural centralizada y guiada
-        </h1>
-        <p class="lead hero-subtitle mx-auto mb-4">
-          Explorá música, artes visuales, teatro, literatura y patrimonio en un solo lugar. Conectá tus gustos de siempre con nuevas experiencias fuera de tu zona de confort.
-        </p>
+  <!-- 2. HERO SECTION — ESTILO 21ST.DEV SPOTLIGHT & STATS CHIPS -->
+  <header class="hero-section text-center position-relative overflow-hidden py-5">
+    <div class="hero-spotlight-glow"></div>
+    <div class="container position-relative py-3">
+      <!-- Badge interactivo de bienvenida estilo 21st.dev -->
+      <div class="d-inline-flex align-items-center gap-2 hero-pill-badge mb-3 px-3 py-1 rounded-pill">
+        <span class="hero-pill-indicator"></span>
+        <span class="hero-pill-text">Montevideo Cultural · Temporada 2026</span>
+        <i class="bi bi-chevron-right small text-muted"></i>
+      </div>
 
-        <!-- Barra de Búsqueda y Filtros Rápidos -->
-        <div class="card search-box mx-auto shadow-sm p-3 mb-2">
-          <div class="row g-2 align-items-center">
-            <div class="col-12 col-md-4">
-              <div class="input-group">
-                <span class="input-group-text bg-white border-end-0 text-muted">
-                  <i class="bi bi-palette"></i>
-                </span>
-                <select class="form-select border-start-0 ps-0" id="filter-categoria">
-                  <option value="todas">Todas las categorías</option>
-                  <option value="Música">Música</option>
-                  <option value="Teatro">Teatro</option>
-                  <option value="Visuales">Artes Visuales</option>
-                  <option value="Cine">Cine</option>
-                  <option value="Literatura">Literatura</option>
-                  <option value="Comunidad">Cultura & Comunidad</option>
-                </select>
-              </div>
-            </div>
+      <h1 class="hero-title mb-3">
+        Tu cartelera cultural <span class="hero-title-highlight">centralizada y guiada</span>
+      </h1>
+      <p class="lead hero-subtitle mx-auto mb-4">
+        Explorá música, artes visuales, teatro, literatura y patrimonio en un solo lugar. Conectá tus gustos de siempre
+        con nuevas experiencias fuera de tu zona de confort.
+      </p>
 
-            <div class="col-12 col-md-3">
-              <div class="input-group">
-                <span class="input-group-text bg-white border-end-0 text-muted">
-                  <i class="bi bi-geo-alt"></i>
-                </span>
-                <select class="form-select border-start-0 ps-0" id="filter-barrio">
-                  <option value="todos">Todos los barrios</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-3">
-              <div class="input-group">
-                <span class="input-group-text bg-white border-end-0 text-muted">
-                  <i class="bi bi-cash"></i>
-                </span>
-                <select class="form-select border-start-0 ps-0" id="filter-precio">
-                  <option value="todos">Cualquier precio</option>
-                  <option value="gratis">Solo Gratuitos</option>
-                  <option value="300">Hasta $ 300</option>
-                  <option value="600">Hasta $ 600</option>
-                  <option value="1000">Hasta $ 1000</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-2 d-grid">
-              <button class="btn btn-culturama-dark" id="btn-reset-filters">
-                <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar
-              </button>
-            </div>
-          </div>
+      <!-- Stats / Quick Highlights al estilo 21st.dev Bento Chips -->
+      <div class="hero-stats-row d-flex justify-content-center gap-3 flex-wrap mb-4">
+        <div class="hero-stat-chip">
+          <i class="bi bi-ticket-perforated-fill text-danger me-1"></i>
+          <span><strong>100%</strong> Verificados</span>
+        </div>
+        <div class="hero-stat-chip">
+          <i class="bi bi-geo-alt-fill text-info me-1"></i>
+          <span><strong>8+</strong> Barrios de Montevideo</span>
+        </div>
+        <div class="hero-stat-chip">
+          <i class="bi bi-stars text-warning me-1"></i>
+          <span>Recomendación Guiada</span>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- 3. SECCIÓN RECOMENDACIONES GUIADAS ("Fuera de tu zona de confort") -->
-    <section class="container my-3" id="seccion-recomendados">
-      <div class="card card-puente-cultural p-4 p-md-5 text-white shadow-sm position-relative overflow-hidden">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <span class="badge bg-culturama-teal fw-bold">
-                <i class="bi bi-compass-fill me-1"></i> Puente Cultural
-              </span>
-              <span class="small text-white-50">Exploración recomendada</span>
-            </div>
-            <h3 class="fw-bold mb-2">Sugerencias fuera de tu zona de confort</h3>
-            <p class="mb-0 text-white-50" id="puente-cultural-descripcion">
-              Basado en tus preferencias seleccionadas, conectamos tus gustos habituales con disciplinas afines para que disfrutes de planes nuevos en Montevideo.
-            </p>
+  <!-- 3. SECCIÓN RECOMENDACIONES GUIADAS ("Fuera de tu zona de confort" — Puente Cultural) -->
+  <section class="container my-4" id="seccion-recomendados">
+    <div class="card card-puente-cultural p-4 p-md-5 text-white shadow-sm position-relative overflow-hidden">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-culturama-teal fw-bold text-dark">
+              <i class="bi bi-compass-fill me-1"></i> Puente Cultural
+            </span>
+            <span class="small text-white-50">Exploración recomendada</span>
           </div>
-          <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
-            <button
-              class="btn btn-light fw-bold px-4 py-2 text-dark shadow-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#modalOnboarding"
-            >
-              <i class="bi bi-sliders me-1"></i> Ajustar mis gustos
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. CARDS DE EVENTOS / CARTELERA -->
-    <main class="container my-5" id="seccion-cartelera">
-      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-        <div>
-          <h2 class="fw-bold text-dark mb-0" id="cartelera-titulo">Cartelera de Eventos</h2>
-          <p class="text-muted small mb-0" id="cartelera-subtitulo">
-            Explorá las actividades culturales programadas en Montevideo
+          <h3 class="fw-bold mb-2">Sugerencias fuera de tu zona de confort</h3>
+          <p class="mb-0 text-white-50" id="puente-cultural-descripcion">
+            Basado en tus preferencias seleccionadas, conectamos tus gustos habituales con disciplinas afines para que
+            disfrutes de planes nuevos en Montevideo.
           </p>
         </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-sm btn-outline-dark active" id="btn-ver-todos">
-            Todos (<span id="count-todos">0</span>)
-          </button>
-          <button class="btn btn-sm btn-outline-danger" id="btn-ver-favoritos">
-            <i class="bi bi-heart-fill me-1"></i> Favoritos (<span id="count-favoritos">0</span>)
+        <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+          <button class="btn btn-light fw-bold px-4 py-2 text-dark shadow-sm" data-bs-toggle="modal"
+            data-bs-target="#modalOnboarding">
+            <i class="bi bi-sliders me-1"></i> Ajustar mis gustos
           </button>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Contenedor de Cards -->
-      <div class="row g-4" id="contenedor-cards">
-        <!-- Renderizado dinámicamente desde main.ts -->
+  <!-- 4. BUSCADOR Y FILTROS DE CARTELERA -->
+  <section class="container my-3" id="seccion-filtros">
+    <div class="card search-box mx-auto shadow-sm p-3 mb-3">
+      <!-- Fila 1: Búsqueda rápida por texto en tiempo real -->
+      <div class="row g-2 align-items-center mb-2">
+        <div class="col-12">
+          <div class="input-group input-group-lg search-input-group">
+            <span class="input-group-text bg-white border-end-0 text-muted ps-3">
+              <i class="bi bi-search text-secondary"></i>
+            </span>
+            <input
+              type="text"
+              class="form-control border-start-0 ps-1"
+              id="filter-busqueda"
+              placeholder="Buscar por título, lugar, teatro o palabra clave..."
+              aria-label="Buscar eventos"
+            />
+            <button
+              class="btn btn-outline-secondary border-start-0 d-none"
+              type="button"
+              id="btn-clear-search"
+              title="Borrar búsqueda"
+            >
+              <i class="bi bi-x-circle-fill text-muted"></i>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Mensaje cuando no hay resultados -->
-      <div class="text-center py-5 d-none" id="mensaje-sin-resultados">
-        <i class="bi bi-emoji-neutral text-muted display-4"></i>
-        <h4 class="fw-bold mt-3 text-secondary">No encontramos eventos con esos filtros</h4>
-        <p class="text-muted">Probá ampliando el rango de precio o seleccionando otra categoría/barrio.</p>
-        <button class="btn btn-outline-dark btn-sm" id="btn-clear-empty">
-          Restablecer filtros
+      <!-- Fila 2: Chips rápidos de categoría (21st.dev Tag Chips) -->
+      <div class="category-chips-bar d-flex gap-2 flex-wrap justify-content-center py-2 mb-2" id="categoryChipsBar">
+        <button type="button" class="category-chip active" data-category="todas">
+          <i class="bi bi-grid-fill me-1"></i> Todas
+        </button>
+        <button type="button" class="category-chip" data-category="Música">
+          <i class="bi bi-music-note-beamed me-1 text-primary"></i> Música
+        </button>
+        <button type="button" class="category-chip" data-category="Teatro">
+          <i class="bi bi-mask me-1 text-danger"></i> Teatro
+        </button>
+        <button type="button" class="category-chip" data-category="Visuales">
+          <i class="bi bi-palette me-1 text-info"></i> Visuales
+        </button>
+        <button type="button" class="category-chip" data-category="Cine">
+          <i class="bi bi-film me-1 text-warning"></i> Cine
+        </button>
+        <button type="button" class="category-chip" data-category="Literatura">
+          <i class="bi bi-book me-1 text-success"></i> Literatura
+        </button>
+        <button type="button" class="category-chip" data-category="Comunidad">
+          <i class="bi bi-people me-1 text-purple"></i> Comunidad
         </button>
       </div>
-    </main>
 
-    <!-- 5. PANEL DE ADMINISTRADOR (Visible únicamente si esAdmin = true) -->
-    <section class="container my-5 py-4 border-top d-none" id="seccion-admin">
-      <div class="card border-warning border-2 shadow-sm rounded-4">
-        <div class="card-header bg-warning bg-opacity-10 py-3">
-          <div class="d-flex justify-content-between align-items-center">
-            <h4 class="fw-bold text-dark mb-0">
-              <i class="bi bi-shield-lock-fill text-warning me-2"></i>
-              Panel de Administrador — Carga y Gestión de Eventos
-            </h4>
-            <span class="badge bg-warning text-dark fw-bold">Modo Administrador Activo</span>
-          </div>
-        </div>
+      <!-- Fila 3: Filtros combinados de Barrio, Precio y Acciones -->
+      <div class="row g-2 align-items-center pt-1 border-top">
+        <!-- Select oculto o sincronizado para compatibilidad -->
+        <select class="d-none" id="filter-categoria">
+          <option value="todas">Todas las categorías</option>
+          <option value="Música">Música</option>
+          <option value="Teatro">Teatro</option>
+          <option value="Visuales">Artes Visuales</option>
+          <option value="Cine">Cine</option>
+          <option value="Literatura">Literatura</option>
+          <option value="Comunidad">Cultura & Comunidad</option>
+        </select>
 
-        <div class="card-body p-4">
-          <form id="form-crear-evento">
-            <div class="row g-3">
-              <div class="col-md-3">
-                <label for="adm-id" class="form-label fw-semibold">ID único (*)</label>
-                <input type="text" class="form-control" id="adm-id" placeholder="ej: ev-ballet-gala" required />
-              </div>
-              <div class="col-md-5">
-                <label for="adm-titulo" class="form-label fw-semibold">Título del evento (*)</label>
-                <input type="text" class="form-control" id="adm-titulo" placeholder="ej: Gala de Ballet Clásico" required />
-              </div>
-              <div class="col-md-4">
-                <label for="adm-categoria" class="form-label fw-semibold">Categoría (*)</label>
-                <select class="form-select" id="adm-categoria" required>
-                  <option value="Música">Música</option>
-                  <option value="Teatro">Teatro</option>
-                  <option value="Visuales">Artes Visuales</option>
-                  <option value="Cine">Cine</option>
-                  <option value="Literatura">Literatura</option>
-                  <option value="Comunidad">Cultura & Comunidad</option>
-                </select>
-              </div>
-
-              <div class="col-md-4">
-                <label for="adm-barrio" class="form-label fw-semibold">Barrio (*)</label>
-                <input type="text" class="form-control" id="adm-barrio" placeholder="ej: Centro" required />
-              </div>
-              <div class="col-md-4">
-                <label for="adm-lugar" class="form-label fw-semibold">Lugar / Sala (*)</label>
-                <input type="text" class="form-control" id="adm-lugar" placeholder="ej: Teatro Solís" required />
-              </div>
-              <div class="col-md-2">
-                <label for="adm-fecha" class="form-label fw-semibold">Fecha (*)</label>
-                <input type="date" class="form-control" id="adm-fecha" required />
-              </div>
-              <div class="col-md-2">
-                <label for="adm-horario" class="form-label fw-semibold">Horario (*)</label>
-                <input type="time" class="form-control" id="adm-horario" required />
-              </div>
-
-              <div class="col-md-3">
-                <label for="adm-precio" class="form-label fw-semibold">Precio en $ (0 = Gratis)</label>
-                <input type="number" class="form-control" id="adm-precio" min="0" value="0" required />
-              </div>
-              <div class="col-md-9">
-                <label for="adm-imagen" class="form-label fw-semibold">URL de Imagen (opcional)</label>
-                <input type="url" class="form-control" id="adm-imagen" placeholder="https://..." />
-              </div>
-
-              <div class="col-12">
-                <label for="adm-descripcion" class="form-label fw-semibold">Descripción detallada (*)</label>
-                <textarea class="form-control" id="adm-descripcion" rows="2" placeholder="Información del evento..." required></textarea>
-              </div>
-
-              <div class="col-12 text-end">
-                <button type="submit" class="btn btn-warning fw-bold text-dark px-4">
-                  <i class="bi bi-plus-circle-fill me-1"></i> Publicar Evento
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. MODAL DE ONBOARDING (Preferencias e Intereses) -->
-    <div
-      class="modal fade"
-      id="modalOnboarding"
-      tabindex="-1"
-      aria-labelledby="modalOnboardingLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content rounded-4 border-0 shadow-lg" style="background-color: var(--culturama-bg);">
-          <div class="modal-header border-0 pb-0">
-            <div>
-              <span class="badge bg-culturama-teal mb-1">Bienvenido a Culturama</span>
-              <h4 class="modal-title fw-extrabold text-dark" id="modalOnboardingLabel">
-                Elegí tus categorías favoritas
-              </h4>
-            </div>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div class="modal-body py-4">
-            <p class="text-muted small">
-              Seleccioná qué disciplinas disfrutás habitualmente para personalizar tus recomendaciones y sugerirte puentes culturales hacia nuevas actividades.
-            </p>
-
-            <div class="d-flex flex-wrap gap-2 my-3" id="onboarding-chips">
-              <!-- Chips interactivos -->
-            </div>
-          </div>
-          <div class="modal-footer border-0 pt-0 d-flex justify-content-between">
-            <button type="button" class="btn btn-outline-secondary btn-sm" id="btn-select-all-interests">
-              Seleccionar todas
-            </button>
-            <button type="button" class="btn btn-culturama-dark px-4" data-bs-dismiss="modal" id="btn-save-onboarding">
-              Listo, guardar mis gustos
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7. MODAL DETALLE DE EVENTO -->
-    <div
-      class="modal fade"
-      id="modalDetalleEvento"
-      tabindex="-1"
-      aria-labelledby="modalDetalleLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 border-0 shadow-lg" style="background-color: var(--culturama-bg);">
-          <div class="modal-header border-0">
-            <h5 class="modal-title fw-bold" id="modalDetalleLabel">Ficha del Evento</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-          </div>
-          <div class="modal-body" id="modalDetalleBody">
-            <!-- Contenido dinámico -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODAL DADO 3D: ¿QUÉ HACER HOY? -->
-    <div
-      class="modal fade"
-      id="modalDadoSorpresa"
-      tabindex="-1"
-      aria-labelledby="modalDadoLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 border-0 shadow-lg text-center p-3" style="background-color: var(--culturama-bg);">
-          <div class="modal-header border-0 pb-0 justify-content-end">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-          </div>
-          <div class="modal-body py-2">
-            <span class="badge bg-culturama-teal px-3 py-1 rounded-pill fw-bold mb-2">
-              <i class="bi bi-dice-5-fill me-1"></i> Ruleta Cultural
+        <div class="col-12 col-md-5">
+          <div class="input-group">
+            <span class="input-group-text bg-white border-end-0 text-muted">
+              <i class="bi bi-geo-alt text-danger"></i>
             </span>
-            <h4 class="fw-extrabold text-dark mb-1">¿Qué hacer hoy?</h4>
-            <p class="text-muted small mb-3">
-              Lanzá el dado para descubrir un evento al azar fuera de tu rutina habitual
-            </p>
+            <select class="form-select border-start-0 ps-0" id="filter-barrio">
+              <option value="todos">Todos los barrios</option>
+            </select>
+          </div>
+        </div>
 
-            <!-- Escenario 3D del Dado con Sombra de Suelo Dinámica -->
-            <div class="dice-stage">
-              <div class="dice-scene" id="dice-scene-click" title="¡Haz clic en el dado para tirarlo!">
-                <div class="dice-cube" id="dice-cube">
-                  <!-- Cara 1 (Frontal) -->
-                  <div class="dice-face face-1">
-                    <span class="dice-pip pip-teal"></span>
-                  </div>
-                  <!-- Cara 2 (Derecha) -->
-                  <div class="dice-face face-2">
-                    <span class="dice-pip pip-coral"></span>
-                    <span class="dice-pip pip-coral"></span>
-                  </div>
-                  <!-- Cara 3 (Trasera) -->
-                  <div class="dice-face face-3">
-                    <span class="dice-pip pip-purple"></span>
-                    <span class="dice-pip pip-purple"></span>
-                    <span class="dice-pip pip-purple"></span>
-                  </div>
-                  <!-- Cara 4 (Izquierda) -->
-                  <div class="dice-face face-4">
-                    <span class="dice-pip"></span>
-                    <span class="dice-pip"></span>
-                    <span class="dice-pip"></span>
-                    <span class="dice-pip"></span>
-                  </div>
-                  <!-- Cara 5 (Superior) -->
-                  <div class="dice-face face-5">
-                    <span class="dice-pip pip-teal"></span>
-                    <span class="dice-pip pip-teal"></span>
-                    <span class="dice-pip pip-coral"></span>
-                    <span class="dice-pip pip-teal"></span>
-                    <span class="dice-pip pip-teal"></span>
-                  </div>
-                  <!-- Cara 6 (Inferior) -->
-                  <div class="dice-face face-6">
-                    <span class="dice-pip pip-purple"></span>
-                    <span class="dice-pip pip-purple"></span>
-                    <span class="dice-pip pip-coral"></span>
-                    <span class="dice-pip pip-coral"></span>
-                    <span class="dice-pip pip-teal"></span>
-                    <span class="dice-pip pip-teal"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="dice-shadow-floor"></div>
+        <div class="col-12 col-md-4">
+          <div class="input-group">
+            <span class="input-group-text bg-white border-end-0 text-muted">
+              <i class="bi bi-tag text-success"></i>
+            </span>
+            <select class="form-select border-start-0 ps-0" id="filter-precio">
+              <option value="todos">Cualquier precio</option>
+              <option value="gratis">Solo Gratuitos</option>
+              <option value="300">Hasta $ 300</option>
+              <option value="600">Hasta $ 600</option>
+              <option value="1000">Hasta $ 1000</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3 d-grid">
+          <button class="btn btn-culturama-dark d-flex align-items-center justify-content-center gap-1" id="btn-reset-filters">
+            <i class="bi bi-arrow-counterclockwise"></i>
+            <span>Restablecer</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Fila 4: Indicador de filtros activos (Filter Tokens Bar) -->
+      <div class="active-filters-summary d-flex align-items-center gap-2 mt-2 pt-2 border-top flex-wrap" id="activeFiltersSummary">
+        <span class="small text-muted"><i class="bi bi-funnel me-1"></i> Filtros activos:</span>
+        <div class="d-flex gap-1 flex-wrap" id="activeFilterTags">
+          <span class="filter-pill-token">Mostrando todos los eventos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CARDS DE EVENTOS / CARTELERA -->
+  <main class="container my-5" id="seccion-cartelera">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+      <div>
+        <h2 class="fw-bold text-dark mb-0" id="cartelera-titulo">Cartelera de Eventos</h2>
+        <p class="text-muted small mb-0" id="cartelera-subtitulo">
+          Explorá las actividades culturales programadas en Montevideo
+        </p>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-outline-dark active" id="btn-ver-todos">
+          Todos (<span id="count-todos">0</span>)
+        </button>
+        <button class="btn btn-sm btn-outline-danger" id="btn-ver-favoritos">
+          <i class="bi bi-heart-fill me-1"></i> Favoritos (<span id="count-favoritos">0</span>)
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenedor de Cards -->
+    <div class="row g-4" id="contenedor-cards">
+      <!-- Renderizado dinámicamente desde main.ts -->
+    </div>
+
+    <!-- Mensaje cuando no hay resultados -->
+    <div class="text-center py-5 d-none" id="mensaje-sin-resultados">
+      <i class="bi bi-emoji-neutral text-muted display-4"></i>
+      <h4 class="fw-bold mt-3 text-secondary">No encontramos eventos con esos filtros</h4>
+      <p class="text-muted">Probá ampliando el rango de precio o seleccionando otra categoría/barrio.</p>
+      <button class="btn btn-outline-dark btn-sm" id="btn-clear-empty">
+        Restablecer filtros
+      </button>
+    </div>
+  </main>
+
+  <!-- 5. PANEL DE ADMINISTRADOR (Visible únicamente si esAdmin = true) -->
+  <section class="container my-5 py-4 border-top d-none" id="seccion-admin">
+    <div class="card border-warning border-2 shadow-sm rounded-4">
+      <div class="card-header bg-warning bg-opacity-10 py-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="fw-bold text-dark mb-0">
+            <i class="bi bi-shield-lock-fill text-warning me-2"></i>
+            Panel de Administrador — Carga y Gestión de Eventos
+          </h4>
+          <span class="badge bg-warning text-dark fw-bold">Modo Administrador Activo</span>
+        </div>
+      </div>
+
+      <div class="card-body p-4">
+        <form id="form-crear-evento">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label for="adm-id" class="form-label fw-semibold">ID único (*)</label>
+              <input type="text" class="form-control" id="adm-id" placeholder="ej: ev-ballet-gala" required />
+            </div>
+            <div class="col-md-5">
+              <label for="adm-titulo" class="form-label fw-semibold">Título del evento (*)</label>
+              <input type="text" class="form-control" id="adm-titulo" placeholder="ej: Gala de Ballet Clásico"
+                required />
+            </div>
+            <div class="col-md-4">
+              <label for="adm-categoria" class="form-label fw-semibold">Categoría (*)</label>
+              <select class="form-select" id="adm-categoria" required>
+                <option value="Música">Música</option>
+                <option value="Teatro">Teatro</option>
+                <option value="Visuales">Artes Visuales</option>
+                <option value="Cine">Cine</option>
+                <option value="Literatura">Literatura</option>
+                <option value="Comunidad">Cultura & Comunidad</option>
+              </select>
             </div>
 
-            <!-- Botón para tirar el dado -->
-            <button class="btn btn-culturama-dark px-4 py-2 rounded-pill fw-bold mb-3 shadow-sm d-inline-flex align-items-center gap-2" id="btn-roll-dice">
-              <i class="bi bi-dice-5-fill"></i>
-              <span>¡Tirar el dado!</span>
-            </button>
+            <div class="col-md-4">
+              <label for="adm-barrio" class="form-label fw-semibold">Barrio (*)</label>
+              <input type="text" class="form-control" id="adm-barrio" placeholder="ej: Centro" required />
+            </div>
+            <div class="col-md-4">
+              <label for="adm-lugar" class="form-label fw-semibold">Lugar / Sala (*)</label>
+              <input type="text" class="form-control" id="adm-lugar" placeholder="ej: Teatro Solís" required />
+            </div>
+            <div class="col-md-2">
+              <label for="adm-fecha" class="form-label fw-semibold">Fecha (*)</label>
+              <input type="date" class="form-control" id="adm-fecha" required />
+            </div>
+            <div class="col-md-2">
+              <label for="adm-horario" class="form-label fw-semibold">Horario (*)</label>
+              <input type="time" class="form-control" id="adm-horario" required />
+            </div>
 
-            <!-- Resultado del Evento seleccionado -->
-            <div id="dice-result-container" class="mt-2 text-start d-none">
-              <div class="card card-event dice-result-card p-3 border shadow-sm">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="badge bg-culturama-teal" id="dice-event-category">Música</span>
-                  <span class="badge bg-light text-dark border" id="dice-event-price">Gratis</span>
-                </div>
-                <h5 class="fw-bold mb-1" id="dice-event-title">Título del Evento</h5>
-                <p class="small text-muted mb-2" id="dice-event-desc">Descripción...</p>
-                <div class="small text-secondary mb-3">
-                  <i class="bi bi-geo-alt-fill text-danger me-1"></i> <span id="dice-event-venue">Lugar</span>
-                </div>
-                <button class="btn btn-sm btn-culturama-dark w-100 py-2 rounded-3" id="btn-dice-ver-ficha">
-                  <i class="bi bi-info-circle me-1"></i> Ver ficha completa del evento
-                </button>
+            <div class="col-md-3">
+              <label for="adm-precio" class="form-label fw-semibold">Precio en $ (0 = Gratis)</label>
+              <input type="number" class="form-control" id="adm-precio" min="0" value="0" required />
+            </div>
+            <div class="col-md-9">
+              <label for="adm-imagen" class="form-label fw-semibold">URL de Imagen (opcional)</label>
+              <input type="url" class="form-control" id="adm-imagen" placeholder="https://..." />
+            </div>
+
+            <div class="col-12">
+              <label for="adm-descripcion" class="form-label fw-semibold">Descripción detallada (*)</label>
+              <textarea class="form-control" id="adm-descripcion" rows="2" placeholder="Información del evento..."
+                required></textarea>
+            </div>
+
+            <div class="col-12 text-end">
+              <button type="submit" class="btn btn-warning fw-bold text-dark px-4">
+                <i class="bi bi-plus-circle-fill me-1"></i> Publicar Evento
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MODAL DE ONBOARDING (Preferencias e Intereses) -->
+  <div class="modal fade" id="modalOnboarding" tabindex="-1" aria-labelledby="modalOnboardingLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4 border-0 shadow-lg" style="background-color: var(--culturama-bg);">
+        <div class="modal-header border-0 pb-0">
+          <div>
+            <span class="badge bg-culturama-teal mb-1">Bienvenido a Culturama</span>
+            <h4 class="modal-title fw-extrabold text-dark" id="modalOnboardingLabel">
+              Elegí tus categorías favoritas
+            </h4>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body py-4">
+          <p class="text-muted small">
+            Seleccioná qué disciplinas disfrutás habitualmente para personalizar tus recomendaciones y sugerirte puentes
+            culturales hacia nuevas actividades.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 my-3" id="onboarding-chips">
+            <!-- Chips interactivos -->
+          </div>
+        </div>
+        <div class="modal-footer border-0 pt-0 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-secondary btn-sm" id="btn-select-all-interests">
+            Seleccionar todas
+          </button>
+          <button type="button" class="btn btn-culturama-dark px-4" data-bs-dismiss="modal" id="btn-save-onboarding">
+            Listo, guardar mis gustos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. MODAL DETALLE DE EVENTO -->
+  <div class="modal fade" id="modalDetalleEvento" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow-lg" style="background-color: var(--culturama-bg);">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="modalDetalleLabel">Información del Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body" id="modalDetalleBody">
+          <!-- Contenido dinámico -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL POPUP DE MAPA 3D INTERACTIVO -->
+  <div class="modal fade modal-mapa-epic" id="modalMapaEvento" tabindex="-1" aria-labelledby="modalMapaLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4 border-0 shadow-2xl modal-mapa-content">
+        <div class="modal-header border-0 pb-2 px-4 pt-4 d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-2">
+            <span class="mapa-badge-pulse">
+              <i class="bi bi-geo-alt-fill text-danger"></i>
+            </span>
+            <div>
+              <h5 class="modal-title fw-bold mb-0 text-dark" id="modalMapaLabel">Ubicación del Evento</h5>
+              <small class="text-muted" id="modalMapaSubtitulo">Montevideo, Uruguay</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-body p-4 pt-2">
+          <!-- Tarjeta Info Rápida de Lugar -->
+          <div class="map-info-pill mb-3 p-3 rounded-3 d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-bold text-dark fs-6" id="modalMapaLugar">Teatro Solís</div>
+              <div class="small text-secondary" id="modalMapaBarrio"><i class="bi bi-pin-map me-1"></i> Ciudad Vieja
+              </div>
+            </div>
+            <a href="#" id="modalMapaGmapsLink" target="_blank" rel="noopener noreferrer"
+              class="btn btn-sm btn-culturama-dark px-3 py-1 rounded-pill d-inline-flex align-items-center gap-1 shadow-sm">
+              <span>Google Maps</span>
+              <i class="bi bi-box-arrow-up-right small"></i>
+            </a>
+          </div>
+
+          <!-- Escenario del Mapa con Google Maps Oficial -->
+          <div class="map-3d-stage" id="mapStage">
+            <!-- Grid sutil de fondo -->
+            <div class="map-grid-bg"></div>
+
+            <!-- Contenedor del Mapa Oficial de Google Maps -->
+            <div class="map-3d-viewport" id="mapViewport">
+              <iframe
+                id="googleMapsIframe"
+                class="w-100 h-100 border-0 rounded-3"
+                title="Ubicación oficial en Google Maps"
+                src="about:blank"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+
+              <!-- HUD Holográfico de Navegación -->
+              <div class="map-hud-overlay">
+                <span class="hud-tag"><i class="bi bi-geo-alt-fill me-1 text-danger"></i> Google Maps</span>
+                <span class="hud-coords" id="hudCoords">-34.9011° S, -56.1645° W</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- 8. FOOTER -->
-    <footer class="footer-culturama mt-auto py-5 text-white-50">
-      <div class="container">
-        <div class="row g-4 align-items-center">
-          <div class="col-md-6">
-            <div class="d-flex align-items-center gap-3 mb-2">
-              <img
-                src="src/interface/img/logo-hd.jpg"
-                alt="Logo Culturama"
-                style="width: 38px; height: 38px; object-fit: contain; border-radius: 8px;"
-              />
-              <span class="brand-title text-white">culturama</span>
+  <!-- MODAL DADO 3D: ¿QUÉ HACER HOY? -->
+  <div class="modal fade" id="modalDadoSorpresa" tabindex="-1" aria-labelledby="modalDadoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow-lg text-center p-3"
+        style="background-color: var(--culturama-bg);">
+        <div class="modal-header border-0 pb-0 justify-content-end">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body py-2">
+          <span class="badge bg-culturama-teal px-3 py-1 rounded-pill fw-bold mb-2">
+            <i class="bi bi-dice-5-fill me-1"></i> Ruleta Cultural
+          </span>
+          <h4 class="fw-extrabold text-dark mb-1">¿Qué hacer hoy?</h4>
+          <p class="text-muted small mb-3">
+            Lanzá el dado para descubrir un evento al azar fuera de tu rutina habitual
+          </p>
+
+          <!-- Escenario 3D del Dado con Sombra de Suelo Dinámica -->
+          <div class="dice-stage">
+            <div class="dice-scene" id="dice-scene-click" title="¡Haz clic en el dado para tirarlo!">
+              <div class="dice-cube" id="dice-cube">
+                <!-- Cara 1 (Frontal) -->
+                <div class="dice-face face-1">
+                  <span class="dice-pip pip-teal"></span>
+                </div>
+                <!-- Cara 2 (Derecha) -->
+                <div class="dice-face face-2">
+                  <span class="dice-pip pip-coral"></span>
+                  <span class="dice-pip pip-coral"></span>
+                </div>
+                <!-- Cara 3 (Trasera) -->
+                <div class="dice-face face-3">
+                  <span class="dice-pip pip-purple"></span>
+                  <span class="dice-pip pip-purple"></span>
+                  <span class="dice-pip pip-purple"></span>
+                </div>
+                <!-- Cara 4 (Izquierda) -->
+                <div class="dice-face face-4">
+                  <span class="dice-pip"></span>
+                  <span class="dice-pip"></span>
+                  <span class="dice-pip"></span>
+                  <span class="dice-pip"></span>
+                </div>
+                <!-- Cara 5 (Superior) -->
+                <div class="dice-face face-5">
+                  <span class="dice-pip pip-teal"></span>
+                  <span class="dice-pip pip-teal"></span>
+                  <span class="dice-pip pip-coral"></span>
+                  <span class="dice-pip pip-teal"></span>
+                  <span class="dice-pip pip-teal"></span>
+                </div>
+                <!-- Cara 6 (Inferior) -->
+                <div class="dice-face face-6">
+                  <span class="dice-pip pip-purple"></span>
+                  <span class="dice-pip pip-purple"></span>
+                  <span class="dice-pip pip-coral"></span>
+                  <span class="dice-pip pip-coral"></span>
+                  <span class="dice-pip pip-teal"></span>
+                  <span class="dice-pip pip-teal"></span>
+                </div>
+              </div>
             </div>
-            <p class="small text-white-50 mb-0">
-              DESCUBRÍ · VIVÍ · SUMÁ — Plataforma de Descubrimiento Cultural Centralizado y Recomendación Fuera de la Zona de Confort.
-            </p>
-            <p class="small text-muted mb-0">
-              Fundamentos de Ingeniería de Software (FIS) — Universidad ORT Uruguay.
-            </p>
+            <div class="dice-shadow-floor"></div>
           </div>
-          <div class="col-md-6 text-md-end">
-            <p class="small mb-1 text-white">
-              Integrantes: <strong>Nahuel Ximeno</strong> & <strong>Lautaro Moreno</strong>
-            </p>
-            <p class="small text-muted mb-0">
-              &copy; 2026 Culturama Montevideo.
-            </p>
+
+          <!-- Botón para tirar el dado -->
+          <button
+            class="btn btn-culturama-dark px-4 py-2 rounded-pill fw-bold mb-3 shadow-sm d-inline-flex align-items-center gap-2"
+            id="btn-roll-dice">
+            <i class="bi bi-dice-5-fill"></i>
+            <span>¡Tirar el dado!</span>
+          </button>
+
+          <!-- Resultado del Evento seleccionado -->
+          <div id="dice-result-container" class="mt-2 text-start d-none">
+            <div class="card card-event dice-result-card p-3 border shadow-sm">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-culturama-teal" id="dice-event-category">Música</span>
+                <span class="badge bg-light text-dark border" id="dice-event-price">Gratis</span>
+              </div>
+              <h5 class="fw-bold mb-1" id="dice-event-title">Título del Evento</h5>
+              <p class="small text-muted mb-2" id="dice-event-desc">Descripción...</p>
+              <div class="small text-secondary mb-3">
+                <i class="bi bi-geo-alt-fill text-danger me-1"></i> <span id="dice-event-venue">Lugar</span>
+              </div>
+              <button class="btn btn-sm btn-culturama-dark w-100 py-2 rounded-3" id="btn-dice-ver-ficha">
+                <i class="bi bi-info-circle me-1"></i> Más información del evento
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Script principal de la aplicación -->
-    <script type="module" src="src/interface/main.ts"></script>
-  </body>
+  <!-- 8. FOOTER -->
+  <footer class="footer-culturama mt-auto py-5 text-white-50">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center gap-3 mb-2">
+            <img src="src/interface/img/logo-hd.jpg" alt="Logo Culturama"
+              style="width: 38px; height: 38px; object-fit: contain; border-radius: 8px;" />
+            <span class="brand-title text-white">culturama</span>
+          </div>
+          <p class="small text-white-50 mb-0">
+            DESCUBRÍ · VIVÍ · SUMÁ — Plataforma de Descubrimiento Cultural Centralizado y Recomendación Fuera de la Zona
+            de Confort.
+          </p>
+          <p class="small text-muted mb-0">
+            Fundamentos de Ingeniería de Software (FIS) — Universidad ORT Uruguay.
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="small mb-1 text-white">
+            Integrantes: <strong>Nahuel Ximeno</strong> & <strong>Lautaro Moreno</strong>
+          </p>
+          <p class="small text-muted mb-0">
+            &copy; 2026 Culturama Montevideo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING DOCK — 21ST.DEV COMPONENT MIGRATED TO VANILLA DOM -->
+  <div class="floating-dock-container" id="floatingDockContainer">
+    <nav class="floating-dock" aria-label="Navegación Rápida Culturama">
+      <!-- Inicio / Cartelera -->
+      <a href="#seccion-cartelera" class="dock-item dock-active" id="dock-cartelera">
+        <i class="bi bi-grid-fill"></i>
+        <span class="dock-tooltip">Cartelera</span>
+      </a>
+
+      <!-- Favoritos -->
+      <a href="#seccion-cartelera" class="dock-item" id="dock-favoritos">
+        <i class="bi bi-heart-fill text-danger"></i>
+        <span class="dock-badge" id="dock-fav-count">0</span>
+        <span class="dock-tooltip">Mis Favoritos</span>
+      </a>
+
+      <div class="dock-separator"></div>
+
+      <!-- Ruleta / ¿Qué hacer hoy? -->
+      <button type="button" class="dock-item" id="dock-dice" title="Ruleta Cultural">
+        <i class="bi bi-dice-5-fill text-warning"></i>
+        <span class="dock-tooltip">¿Qué hacer hoy?</span>
+      </button>
+
+      <!-- Ajustar gustos / Onboarding -->
+      <button type="button" class="dock-item" id="dock-interests" data-bs-toggle="modal"
+        data-bs-target="#modalOnboarding" title="Mis Intereses">
+        <i class="bi bi-compass-fill text-info"></i>
+        <span class="dock-tooltip">Mis Gustos</span>
+      </button>
+
+      <!-- Ir arriba -->
+      <a href="#" class="dock-item" id="dock-scroll-top">
+        <i class="bi bi-arrow-up-short"></i>
+        <span class="dock-tooltip">Subir</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <!-- Leaflet.js JS Bundle -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Script principal de la aplicación -->
+  <script type="module" src="src/interface/main.ts"></script>
+</body>
+
 </html>

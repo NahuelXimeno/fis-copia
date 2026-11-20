@@ -3,6 +3,7 @@ export interface CriterioFiltro {
   barrio?: string;
   precioMax?: number;
   soloGratis?: boolean;
+  busquedaTexto?: string;
 }
 
 export class Evento {
@@ -179,6 +180,18 @@ export class Evento {
 
     if (filtro.precioMax !== undefined && !isNaN(filtro.precioMax) && filtro.precioMax > 0) {
       if (this.precio > filtro.precioMax) {
+        return false;
+      }
+    }
+
+    if (filtro.busquedaTexto && filtro.busquedaTexto.trim()) {
+      const q = filtro.busquedaTexto.trim().toLowerCase();
+      const coincideTexto =
+        this.titulo.toLowerCase().includes(q) ||
+        this.descripcion.toLowerCase().includes(q) ||
+        this.lugar.toLowerCase().includes(q) ||
+        this.barrio.toLowerCase().includes(q);
+      if (!coincideTexto) {
         return false;
       }
     }
