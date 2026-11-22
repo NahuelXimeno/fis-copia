@@ -160,6 +160,8 @@ describe("Evento class tests", () => {
     );
     evento.imagenUrl = "  https://test.com/foto.jpg  ";
     expect(evento.imagenUrl).toBe("https://test.com/foto.jpg");
+    evento.imagenUrl = undefined;
+    expect(evento.imagenUrl).toBe("");
   });
 
   test("Match filter criteria", () => {

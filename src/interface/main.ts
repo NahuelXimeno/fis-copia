@@ -4,7 +4,8 @@ import { Usuario } from "../domain/usuario.ts";
 
 // --- ESTADO EN MEMORIA (Sin persistencia externa, conforme a restricciones) ---
 const usuarioComun = new Usuario("u-lautaro", "Lautaro", false);
-usuarioComun.intereses = ["Música", "Teatro"];
+// Usuario nuevo inicia sin intereses preseleccionados para que complete su Onboarding
+usuarioComun.intereses = [];
 
 const usuarioAdmin = new Usuario("u-admin", "Nahuel (Admin)", true);
 usuarioAdmin.intereses = ["Música", "Visuales", "Cine"];
@@ -85,6 +86,78 @@ const eventosIniciales: Evento[] = [
     "18:30",
     0,
     "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=60"
+  ),
+  new Evento(
+    "ev-7",
+    "Sinfonía Montevideana: Clásicos al Aire Libre",
+    "Concierto de cámara interpretando obras de Piazzolla y Fabini en el rosedal histórico.",
+    "Música",
+    "Prado",
+    "Rosedal del Prado (Av. Buschental)",
+    "2026-11-27",
+    "19:00",
+    0,
+    "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=800&auto=format&fit=crop&q=60"
+  ),
+  new Evento(
+    "ev-8",
+    "Stand-Up & Café Concert",
+    "Noche de monólogos humorísticos y comedia uruguaya emergente con servicio de café y barra.",
+    "Teatro",
+    "Cordón",
+    "Teatro El Galpón (Av. 18 de Julio 1618)",
+    "2026-11-28",
+    "21:00",
+    420,
+    "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=800&auto=format&fit=crop&q=60"
+  ),
+  new Evento(
+    "ev-9",
+    "Instalación Inmersiva: Luces de la Bahía",
+    "Experiencia lumínica e interactiva con proyecciones audiovisuales sobre el muro del dique.",
+    "Visuales",
+    "Ciudad Vieja",
+    "Espacio de Arte Contemporáneo (EAC)",
+    "2026-11-24",
+    "18:00",
+    180,
+    "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&auto=format&fit=crop&q=60"
+  ),
+  new Evento(
+    "ev-10",
+    "Festival de Cortometrajes Latinoamericanos",
+    "Muestra competitiva de realizadores independientes de Uruguay, Argentina y Brasil con charlas abiertas.",
+    "Cine",
+    "Centro",
+    "Sala Zitarrosa (Av. 18 de Julio 1012)",
+    "2026-11-26",
+    "20:30",
+    300,
+    "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=800&auto=format&fit=crop&q=60"
+  ),
+  new Evento(
+    "ev-11",
+    "Taller y Recital de Poesía Rioplatense",
+    "Espacio interactivo de escritura creativa, lectura comentada de poetas uruguayos y micrófono abierto.",
+    "Literatura",
+    "Pocitos",
+    "Biblioteca Amado Nervo (Santiago Vázquez 1135)",
+    "2026-11-21",
+    "17:30",
+    0,
+    "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop&q=60"
+  ),
+  new Evento(
+    "ev-12",
+    "Caminatour Histórico & Patrimonio del Barrio Sur",
+    "Recorrido peatonal guiado descubriendo conventillos históricos, arte mural y la ruta del candombe tradicional.",
+    "Comunidad",
+    "Barrio Sur",
+    "Plaza Carlos Gardel (Zelmar Michelini & Carlos Gardel)",
+    "2026-11-30",
+    "16:30",
+    0,
+    "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&auto=format&fit=crop&q=60"
   ),
 ];
 
@@ -218,6 +291,9 @@ const activeFilterTags = document.getElementById("activeFilterTags") as HTMLDivE
 const btnResetFilters = document.getElementById("btn-reset-filters") as HTMLButtonElement;
 const btnClearEmpty = document.getElementById("btn-clear-empty") as HTMLButtonElement;
 const mensajeSinResultados = document.getElementById("mensaje-sin-resultados") as HTMLDivElement;
+const sinResultadosIcono = document.getElementById("sin-resultados-icono") as HTMLElement;
+const sinResultadosTitulo = document.getElementById("sin-resultados-titulo") as HTMLElement;
+const sinResultadosDesc = document.getElementById("sin-resultados-desc") as HTMLElement;
 
 const countTodos = document.getElementById("count-todos") as HTMLSpanElement;
 const countFavoritos = document.getElementById("count-favoritos") as HTMLSpanElement;
@@ -250,6 +326,18 @@ document.addEventListener("DOMContentLoaded", () => {
   renderizarChipsOnboarding();
   aplicarFiltrosYRenderizar();
   configurarEventosUI();
+
+  // Si el usuario ingresa sin intereses definidos, desplegar automáticamente el onboarding
+  if (usuarioActivo.intereses.length === 0) {
+    setTimeout(() => {
+      const modalEl = document.getElementById("modalOnboarding");
+      if (modalEl) {
+        // @ts-expect-error Bootstrap Modal
+        const modalOnboarding = new window.bootstrap.Modal(modalEl);
+        modalOnboarding.show();
+      }
+    }, 450);
+  }
 });
 
 // Poblar selector dinámico de barrios a partir de la lista
@@ -304,7 +392,13 @@ function configurarEventosUI() {
   });
 
   btnResetFilters?.addEventListener("click", resetearFiltros);
-  btnClearEmpty?.addEventListener("click", resetearFiltros);
+  btnClearEmpty?.addEventListener("click", () => {
+    if (mostrandoSoloFavoritos) {
+      btnVerTodos.click();
+    } else {
+      resetearFiltros();
+    }
+  });
 
   btnVerTodos?.addEventListener("click", () => {
     mostrandoSoloFavoritos = false;
@@ -327,11 +421,15 @@ function configurarEventosUI() {
   tabCartelera?.addEventListener("click", (e) => {
     e.preventDefault();
     btnVerTodos.click();
+    const seccionCartelera = document.getElementById("seccion-cartelera");
+    seccionCartelera?.scrollIntoView({ behavior: "smooth" });
   });
 
   tabFavoritos?.addEventListener("click", (e) => {
     e.preventDefault();
     btnVerFavoritos.click();
+    const seccionCartelera = document.getElementById("seccion-cartelera");
+    seccionCartelera?.scrollIntoView({ behavior: "smooth" });
   });
 
   // Cambio de usuario / rol
@@ -608,6 +706,35 @@ function renderizarCards(eventos: Evento[]) {
   contenedorCards.innerHTML = "";
 
   if (eventos.length === 0) {
+    if (mostrandoSoloFavoritos) {
+      if (sinResultadosIcono) {
+        sinResultadosIcono.className = "bi bi-heartbreak text-danger display-4";
+      }
+      if (sinResultadosTitulo) {
+        sinResultadosTitulo.textContent = "No tenés ningún evento en favoritos";
+      }
+      if (sinResultadosDesc) {
+        sinResultadosDesc.textContent =
+          "Guardá los eventos que más te interesen presionando el corazón en cada tarjeta para revisarlos cuando quieras.";
+      }
+      if (btnClearEmpty) {
+        btnClearEmpty.innerHTML = '<i class="bi bi-grid-fill me-1"></i> Explorar todos los eventos';
+      }
+    } else {
+      if (sinResultadosIcono) {
+        sinResultadosIcono.className = "bi bi-emoji-neutral text-muted display-4";
+      }
+      if (sinResultadosTitulo) {
+        sinResultadosTitulo.textContent = "No encontramos eventos con esos filtros";
+      }
+      if (sinResultadosDesc) {
+        sinResultadosDesc.textContent =
+          "Probá ampliando el rango de precio o seleccionando otra categoría/barrio.";
+      }
+      if (btnClearEmpty) {
+        btnClearEmpty.innerHTML = '<i class="bi bi-arrow-counterclockwise me-1"></i> Restablecer filtros';
+      }
+    }
     mensajeSinResultados.classList.remove("d-none");
     return;
   }
@@ -620,11 +747,17 @@ function renderizarCards(eventos: Evento[]) {
     const esFav = usuarioActivo.tieneFavorito(ev.id);
     const precioTexto = ev.esGratuito ? "Entrada Libre" : `$ ${ev.precio}`;
 
-    let badgeClass = "bg-culturama-teal";
-    if (ev.categoria === "Teatro" || ev.categoria === "Literatura") {
-      badgeClass = "bg-culturama-coral";
-    } else if (ev.categoria === "Visuales" || ev.categoria === "Cine") {
-      badgeClass = "bg-culturama-purple";
+    let badgeClass = "badge-cat-musica";
+    if (ev.categoria === "Teatro") {
+      badgeClass = "badge-cat-teatro";
+    } else if (ev.categoria === "Visuales") {
+      badgeClass = "badge-cat-visuales";
+    } else if (ev.categoria === "Cine") {
+      badgeClass = "badge-cat-cine";
+    } else if (ev.categoria === "Literatura") {
+      badgeClass = "badge-cat-literatura";
+    } else if (ev.categoria === "Comunidad") {
+      badgeClass = "badge-cat-comunidad";
     }
 
     col.innerHTML = `
@@ -655,7 +788,7 @@ function renderizarCards(eventos: Evento[]) {
             </span>
           </div>
 
-          <h5 class="card-title fw-bold text-dark mb-2">${ev.titulo}</h5>
+          <h3 class="card-title fw-bold text-dark fs-5 mb-2">${ev.titulo}</h3>
           <p class="card-text text-muted small flex-grow-1 mb-3">${ev.descripcion}</p>
 
           <div class="small text-secondary mb-3">
@@ -781,7 +914,7 @@ function mostrarModalDetalle(id: string) {
       <button class="btn btn-culturama-teal btn-sm text-dark fw-bold btn-abrir-mapa-modal" data-id="${ev.id}">
         <i class="bi bi-geo-alt-fill text-danger me-1"></i> Abrir mapa interactivo 3D
       </button>
-      <a href="https://maps.google.com/?q=${encodeURIComponent(ev.lugar + ' ' + ev.barrio + ' Montevideo')}" target="_blank" class="btn btn-outline-dark btn-sm">
+      <a href="https://maps.google.com/?q=${encodeURIComponent(`${ev.lugar  } ${  ev.barrio  } Montevideo`)}" target="_blank" class="btn btn-outline-dark btn-sm">
         <i class="bi bi-box-arrow-up-right me-1"></i> Abrir en Google Maps externo
       </a>
     </div>
@@ -893,36 +1026,195 @@ function crearEventoAdmin() {
   }
 }
 
+const CATEGORIAS_CONFIG: Record<
+  string,
+  { icono: string; color: string; desc: string; badge: string }
+> = {
+  Música: {
+    icono: "bi-music-note-beamed",
+    color: "#0284C7",
+    desc: "Recitales, orquestas, jazz, acústicos y candombe montevideano.",
+    badge: "Conciertos & Bandas",
+  },
+  Teatro: {
+    icono: "bi-mask",
+    color: "#E11D48",
+    desc: "Obras clásicas, stand-up, ópera, títeres y drama en vivo.",
+    badge: "Artes Escénicas",
+  },
+  Visuales: {
+    icono: "bi-palette",
+    color: "#0D9488",
+    desc: "Galerías, museos, muestras fotográficas e instalaciones urbanas.",
+    badge: "Muestras & Galerías",
+  },
+  Cine: {
+    icono: "bi-film",
+    color: "#D97706",
+    desc: "Festivales, cinemateca, cine clásico y estrenos independientes.",
+    badge: "Proyecciones & Ciclos",
+  },
+  Literatura: {
+    icono: "bi-book",
+    color: "#16A34A",
+    desc: "Presentaciones, ferias de editoriales, charlas y poesía.",
+    badge: "Letras & Lecturas",
+  },
+  Comunidad: {
+    icono: "bi-people",
+    color: "#7C3AED",
+    desc: "Murgas de carnaval, talleres barriales, ferias y patrimonio.",
+    badge: "Cultura Abierta",
+  },
+};
+
 function renderizarChipsOnboarding() {
   const todasCategorias = ["Música", "Teatro", "Visuales", "Cine", "Literatura", "Comunidad"];
   onboardingChipsContainer.innerHTML = "";
 
-  todasCategorias.forEach((cat) => {
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = `interest-chip ${usuarioActivo.intereses.includes(cat) ? "active" : ""}`;
-    chip.textContent = cat;
+  const countEl = document.getElementById("onboarding-selection-count");
+  const actualizarContadorOnboarding = () => {
+    if (countEl) {
+      const cant = usuarioActivo.intereses.length;
+      countEl.textContent = `${cant} seleccionada${cant === 1 ? "" : "s"}`;
+    }
+  };
 
-    chip.addEventListener("click", () => {
-      chip.classList.toggle("active");
+  todasCategorias.forEach((cat) => {
+    const config = CATEGORIAS_CONFIG[cat] || {
+      icono: "bi-stars",
+      color: "#1A1A1A",
+      desc: "Eventos y actividades culturales.",
+      badge: "Categoría",
+    };
+
+    const isSelected = usuarioActivo.intereses.includes(cat);
+
+    const col = document.createElement("div");
+    col.className = "col-12 col-sm-6";
+
+    col.innerHTML = `
+      <div class="onboarding-card-bento ${isSelected ? "selected" : ""}" role="button" tabindex="0" data-cat="${cat}">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div class="bento-icon-wrapper" style="--cat-color: ${config.color};">
+            <i class="bi ${config.icono}"></i>
+          </div>
+          <div class="bento-check-circle">
+            <i class="bi bi-check-lg"></i>
+          </div>
+        </div>
+        <div class="bento-card-title">${cat}</div>
+        <div class="bento-card-desc">${config.desc}</div>
+        <div class="bento-card-badge mt-2">
+          <span>${config.badge}</span>
+        </div>
+      </div>
+    `;
+
+    const bentoCard = col.querySelector(".onboarding-card-bento") as HTMLElement;
+
+    const toggleSelection = () => {
       if (usuarioActivo.intereses.includes(cat)) {
         usuarioActivo.eliminarInteres(cat);
+        bentoCard.classList.remove("selected");
       } else {
         usuarioActivo.agregarInteres(cat);
+        bentoCard.classList.add("selected");
+      }
+      actualizarContadorOnboarding();
+      actualizarBadges();
+      actualizarMensajePuenteCultural();
+      aplicarFiltrosYRenderizar();
+    };
+
+    bentoCard.addEventListener("click", toggleSelection);
+    bentoCard.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleSelection();
       }
     });
 
-    onboardingChipsContainer.appendChild(chip);
+    onboardingChipsContainer.appendChild(col);
   });
+
+  actualizarContadorOnboarding();
 }
 
 function actualizarMensajePuenteCultural() {
   const intereses = usuarioActivo.intereses;
+  const colAction = document.getElementById("puente-cultural-col-action");
+  const puenteTitulo = document.getElementById("puente-cultural-titulo");
+  const puenteBadgeSub = document.getElementById("puente-cultural-badge-sub");
+  const cardPuente = document.querySelector(".card-puente-cultural") as HTMLElement;
+
+  if (!puenteCulturalDescripcion || !colAction) return;
+
   if (intereses.length === 0) {
+    if (cardPuente) {
+      cardPuente.style.backgroundImage = "linear-gradient(135deg, #18181B 0%, #27272A 100%)";
+    }
+    if (puenteBadgeSub) puenteBadgeSub.textContent = "Personalización requerida";
+    if (puenteTitulo) puenteTitulo.textContent = "Definí tus gustos culturales";
     puenteCulturalDescripcion.textContent =
-      "No tenés intereses seleccionados. Hacé clic en 'Ajustar mis gustos' para que podamos recomendarte planes a tu medida.";
+      "No tenés ningún interés seleccionado. Hacé clic en el botón para elegir qué disciplinas disfrutás y descubrir recomendaciones exclusivas fuera de tu zona de confort.";
+
+    colAction.innerHTML = `
+      <button class="btn btn-light fw-bold px-4 py-2.5 text-dark shadow-sm rounded-pill d-inline-flex align-items-center gap-2"
+        data-bs-toggle="modal" data-bs-target="#modalOnboarding">
+        <i class="bi bi-sliders"></i>
+        <span>Ajustar mis gustos</span>
+      </button>
+    `;
   } else {
-    puenteCulturalDescripcion.textContent = `Tus preferencias actuales son: ${intereses.join(", ")}. Te recomendamos explorar actividades complementarias que enriquecen tu consumo habitual con puentes culturales hacia disciplinas afines.`;
+    // Buscar eventos en disciplinas ajenas a los gustos declarados
+    const eventosDisponibles = listaEventos.eventos;
+    const eventosAjenos = eventosDisponibles.filter(
+      (ev) => !intereses.includes(ev.categoria)
+    );
+
+    const eventoSugerido =
+      eventosAjenos.length > 0
+        ? eventosAjenos[0]
+        : eventosDisponibles[0];
+
+    // Colocar la imagen del evento con overlay oscuro estilo hero section
+    if (cardPuente && eventoSugerido.imagenUrl) {
+      cardPuente.style.backgroundImage = `linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.88)), url("${eventoSugerido.imagenUrl}")`;
+    } else if (cardPuente) {
+      cardPuente.style.backgroundImage = "linear-gradient(135deg, #18181B 0%, #27272A 100%)";
+    }
+
+    if (puenteBadgeSub) puenteBadgeSub.textContent = `Fuera de tu zona de confort (${eventoSugerido.categoria})`;
+    if (puenteTitulo) puenteTitulo.textContent = `Descubrimiento guiado: ${eventoSugerido.titulo}`;
+
+    puenteCulturalDescripcion.innerHTML = `
+      Tus intereses son <strong>${intereses.join(", ")}</strong>. Para salir de tu rutina habitual, te sugerimos este plan en 
+      <strong>${eventoSugerido.categoria}</strong> en <strong>${eventoSugerido.lugar} (${eventoSugerido.barrio})</strong>: 
+      <em>"${eventoSugerido.descripcion}"</em>
+    `;
+
+    colAction.innerHTML = `
+      <div class="d-flex justify-content-lg-end">
+        <button class="btn btn-outline-light fw-semibold px-3 py-2 rounded-pill d-inline-flex align-items-center justify-content-center gap-1 shadow-sm"
+          data-bs-toggle="modal" data-bs-target="#modalOnboarding" title="Cambiar tus preferencias">
+          <i class="bi bi-sliders"></i>
+          <span>Ajustar gustos</span>
+        </button>
+      </div>
+    `;
+
+    // Clic en toda la tarjeta de Puente Cultural para abrir la información del evento
+    if (cardPuente) {
+      cardPuente.onclick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        // Si hace clic en el botón de onboarding, no disparar el modal de evento
+        if (target.closest("button") || target.closest("a")) {
+          return;
+        }
+        mostrarModalDetalle(eventoSugerido.id);
+      };
+    }
   }
 }
 

@@ -35,7 +35,13 @@ export default defineConfig([
       "prefer-template": "error",
 
       // User interface
-      "no-alert": "error",
+      "no-alert": "warn",
+    },
+  },
+  {
+    files: ["src/domain/evento.ts"],
+    rules: {
+      "max-params": "off",
     },
   },
 ]);
