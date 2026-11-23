@@ -112,15 +112,18 @@ La interfaz de **CULTURAMA** fue concebida como una aplicación de página únic
 2. **Interactividad fluida:** Filtros reactivos en tiempo real por categoría (mediante chips interactivos y selector desplegable), barrio montevideano, rango de precio o gratuidad, y barra de búsqueda textual instantánea.
 3. **Elemento lúdico y disruptivo:** Se incorporó un **Dado 3D interactivo** ("Modo Sorpresa") con simulación física continua y desaceleración elástica por `requestAnimationFrame`, diseñado expresamente para materializar el descubrimiento de eventos fuera de la zona de confort del usuario.
 
-A continuación se presentan capturas del resultado final y prototipos de la interfaz:
+A continuación se presentan las capturas reales de la aplicación web final en ejecución:
 
 | Sección / Vista | Visualización |
 | :--- | :--- |
-| **Inicio y Portada (Hero Section)** | ![Inicio](img/prototipo-inicio.jpeg) |
-| **Catálogo y Cartelera con Filtros** | ![Cartelera](img/prototipo-cartelera.jpeg) |
-| **Gestión de Preferencias y Onboarding** | ![Preferencias](img/prototipo-preferencias.jpeg) |
-| **Sección de Favoritos Guardados** | ![Favoritos](img/prototipo-favoritos.jpeg) |
-| **Recomendación y Descubrimiento Guiado** | ![Similares y Recomendados](img/prototipo-similares.jpeg) |
+| **Inicio y Portada (Hero Section & Puente Cultural)** | ![Inicio y Puente Cultural](img/app-inicio-hero.jpeg) |
+| **Onboarding y Personalización de Intereses** | ![Onboarding Interactivo](img/app-onboarding.jpeg) |
+| **Catálogo y Cartelera con Filtros Multicriterio** | ![Cartelera y Filtros](img/app-cartelera-filtros.jpeg) |
+| **Ficha Detallada de Evento (Modal Informativo)** | ![Ficha Detallada de Evento](img/app-detalle-evento.png) |
+| **Ubicación Geográfica en Mapa Interactivo** | ![Ubicación en Google Maps](img/app-mapa-3d.jpeg) |
+| **Dado 3D Interactivo ("¿Qué hacer hoy?")** | ![Dado 3D Ruleta Cultural](img/app-dado-3d.png) |
+| **Panel de Administración (Carga y Gestión de Eventos)** | ![Panel de Administrador](img/app-panel-admin.png) |
+| **Sección de Favoritos Guardados** | ![Eventos Favoritos Guardados](img/app-favoritos.jpeg) |
 
 ### Aplicación de Principios de Usabilidad (Heurísticas de Nielsen)
 
